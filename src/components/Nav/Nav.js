@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import {
+  Grid,
+  withStyles,
+  Typography, 
+  Button
+ } from '@material-ui/core';
 
 const Nav = (props) => {
   let loginLinkData = {
     path: '/login',
-    text: 'Login / Register',
+    text: 'Login',
   };
 
   if (props.store.user.id != null) {
@@ -17,11 +23,11 @@ const Nav = (props) => {
   }
 
   return (
-    <div className="nav">
+    <Grid className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <Typography variant="h2" className="nav-title"> Topo</Typography>
       </Link>
-      <div className="nav-right">
+      <Grid className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
@@ -38,11 +44,11 @@ const Nav = (props) => {
           </>
         )}
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
+        {/* <Link className="nav-link" to="/about">
           About
-        </Link>
-      </div>
-    </div>
+        </Link> */}
+      </Grid>
+    </Grid>
   );
 };
 
