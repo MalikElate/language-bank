@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import LessonTableRow from '../LessonTableRow/LessonTableRow'; 
 import {
   Grid,
   withStyles, 
   Typography, 
-  Button
+  Button, 
+  Table, 
+  TableHead, 
+  TableRow, 
+  TableCell, 
+  TableBody, 
+
  } from '@material-ui/core';
- 
+
 const styles = { 
   
 }
@@ -31,9 +38,24 @@ class Dashboard extends Component {
           item lg={6} sm={6} xs={12}
           style={{ padding: 20}}>
             <Typography variant="h3">Lessons</Typography> 
-
-
-
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Lesson Name</TableCell>
+                  <TableCell>Language</TableCell>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Lesson Code</TableCell>
+                  <TableCell>&nbsp;</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                { 
+                  this.props.reduxState.lesson.allUserLessons.map((lesson, i) => 
+                    <LessonTableRow key={i} lesson={lesson}/>
+                  )
+                }
+              </TableBody>
+            </Table> 
           </Grid>
           <Grid
           item lg={6} sm={6} xs={12}

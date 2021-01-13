@@ -20,6 +20,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import UserPage from '../UserPage/UserPage';
 import Dashboard from '../Dashboard/Dashboard';
 import CreateLessonPage from '../CreateLessonPage/CreateLessonPage';
+import LessonDetails from '../LessonDetails/LessonDetails'; 
 import './App.css';
 
 class App extends Component {
@@ -56,14 +57,27 @@ class App extends Component {
               path="/user"
               component={UserPage}
             />
-
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/home"
+              component={LandingPage}
+              authRedirect="/user"
+            />
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
               path="/dashboard"
               component={Dashboard}
             />
-
+             <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/lessondetails"
+              component={LessonDetails}
+            />
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -90,15 +104,7 @@ class App extends Component {
               path="/createlesson"
               component={CreateLessonPage}
             />
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LandingPage at "/home"
-              exact
-              path="/home"
-              component={LandingPage}
-              authRedirect="/user"
-            />
+            
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

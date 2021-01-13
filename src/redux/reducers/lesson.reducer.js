@@ -1,17 +1,10 @@
 import { combineReducers } from 'redux';
 
-// loginMessage holds the string that will display
-// on the login screen if there's an error
-const allLessons = (state = '', action) => {
+// This reducer holds all of a users lessons, to be displayed on the dashboard page
+const allUserLessons = (state = [], action) => {
   switch (action.type) {
-    case 'CLEAR_LOGIN_ERROR':
-      return '';
-    case 'LOGIN_INPUT_ERROR':
-      return 'Enter your username and password!';
-    case 'LOGIN_FAILED':
-      return "Oops! The username and password didn't match. Try again!";
-    case 'LOGIN_FAILED_NO_CODE':
-      return 'Oops! Something went wrong! Is the server running?';
+    case 'SET_ALL_LESSONS':
+      return action.payload;
     default:
       return state;
   }
@@ -19,7 +12,7 @@ const allLessons = (state = '', action) => {
 
 // registrationMessage holds the string that will display
 // on the registration screen if there's an error
-const currentLesson = (state = '', action) => {
+const currentLesson = (state = [], action) => {
   switch (action.type) {
     case 'CLEAR_REGISTRATION_ERROR':
       return '';
@@ -30,12 +23,12 @@ const currentLesson = (state = '', action) => {
     default:
       return state;
   }
-};
+}; 
 
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
 export default combineReducers({
-  allLessons,
-  registrationMessage,
+  allUserLessons,
+  currentLesson,
 });

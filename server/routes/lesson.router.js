@@ -6,9 +6,11 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  // Add query to get all genres
-  let queryText = 'SELECT * from "lesson" WHERE lesson_owner_id =1;'; 
-  pool.query(queryText)
+  // Add query to get all lessons for a specific user
+  let userId = req.user.id; 
+  console.log(req.user.id); 
+  let queryText = 'SELECT * from "lesson" WHERE lesson_owner_id = $1;'; 
+  pool.query(queryText, [userId])
   .then( (result) => {
       res.send(result.rows);
   })
@@ -29,7 +31,6 @@ router.post('/', (req, res) => {
     const name = req.body.lessonName; 
     const language = req.body.language; 
     const lesson_owner_id = req.body.lesson_owner_id; 
-    console.log(req.body)
     const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "lesson_owner_id") 
     VALUES ($1, $2, $3, $4, $5);`;
     pool.query(queryText, [description, notes, name, language, lesson_owner_id])

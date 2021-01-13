@@ -16,7 +16,7 @@ function* getAllLessons(){
   try {
       console.log('Getting all lessons for logged user from db'); 
       const response = yield axios.get('/api/lesson');
-      yield put({type: 'SET_ALL_LESSON', payload: response.data}); 
+      yield put({type: 'SET_ALL_LESSONS', payload: response.data}); 
       console.log('All lessons from logged in user', response.data); 
   }
   catch (error) {
