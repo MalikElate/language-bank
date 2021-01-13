@@ -1,0 +1,45 @@
+const express = require('express');
+const pool = require('../modules/pool');
+const router = express.Router();
+
+/**
+ * GET route template
+ */
+router.get('/', (req, res) => {
+  // Add query to get all genres
+  let queryText = 'SELECT * from "lesson" WHERE lesson_owner_id =1;'; 
+  pool.query(queryText)
+  .then( (result) => {
+      res.send(result.rows);
+  })
+  .catch( (error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+  });
+}); 
+
+
+/**
+ * POST route template
+ */
+router.post('/', (req, res) => {
+  // POST route code here
+    const description = req.body.description;
+    const notes = req.body.notes; 
+    const name = req.body.lessonName; 
+    const language = req.body.language; 
+    const lesson_owner_id = req.body.lesson_owner_id; 
+    console.log(req.body)
+    const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "lesson_owner_id") 
+    VALUES ($1, $2, $3, $4, $5);`;
+    pool.query(queryText, [description, notes, name, language, lesson_owner_id])
+      .then(() => res.sendStatus(201))
+      .catch( (error) => {
+        console.log(`Error on post lesson query ${error}`);
+        // res.sendStatus(500);
+        res.send(error)
+    });
+  }); 
+
+
+module.exports = router;

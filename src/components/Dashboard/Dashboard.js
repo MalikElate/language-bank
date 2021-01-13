@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Grid,
-  withStyles,
+  withStyles, 
   Typography, 
   Button
  } from '@material-ui/core';
+ 
+const styles = { 
+  
+}
 
-class InfoPage extends React.Component {
+class Dashboard extends Component {
 
-  render() {
+  componentDidMount() { 
+    console.log('-----------------------dashboard mounted----------------------'); 
+    this.props.dispatch({type: "GET_ALL_LESSONS"}); 
+  }
+
+
+  render() { 
+   const { classes } = this.props; 
     return (
       <Grid
           container
@@ -19,6 +31,9 @@ class InfoPage extends React.Component {
           item lg={6} sm={6} xs={12}
           style={{ padding: 20}}>
             <Typography variant="h3">Lessons</Typography> 
+
+
+
           </Grid>
           <Grid
           item lg={6} sm={6} xs={12}
@@ -32,5 +47,9 @@ class InfoPage extends React.Component {
     )
   }
 }
+const mapStateToProps = reduxState => ({
+  reduxState
+});
 
-export default InfoPage;
+export default connect(mapStateToProps)(withStyles(styles)(Dashboard))
+

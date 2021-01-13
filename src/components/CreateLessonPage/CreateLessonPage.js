@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
   Grid,
   withStyles,
@@ -22,7 +21,7 @@ const styles = {
 class CreateLesson extends Component {
   state = {
     newLesson: { 
-      userId: this.props.reduxState.user.id,
+      lesson_owner_id: this.props.reduxState.user.id,
       lessonName: '', 
       language: '', 
       description: '', 
@@ -31,7 +30,6 @@ class CreateLesson extends Component {
   };
 
   handleChangeFor = (event, inputType) => { 
-    console.log(event.target.value); 
     this.setState({ 
       newLesson: {
         ...this.state.newLesson, 
@@ -40,9 +38,12 @@ class CreateLesson extends Component {
     })
   }
 
+  submit = () => { 
+    this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson})
+  }
+
   render() {
-    const { classes } = this.props
-    console.log(this.state.newLesson)
+    const { classes } = this.props; 
     return (
       <Grid> 
         {JSON.stringify(this.props.reduxState.user.id)}
@@ -63,7 +64,7 @@ class CreateLesson extends Component {
           onChange={(event)=> this.handleChangeFor(event, 'notes')}/>
         </Grid> 
         <Grid className={classes.submitButton}>
-          <Button style={{marginRight: "1000"}} variant="contained">Submit</Button>
+          <Button style={{marginRight: "1000"}} variant="contained" onClick={this.submit}>Submit</Button>
         </Grid>
       </Grid>
     );
