@@ -12,13 +12,14 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from './theme'; 
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import UserPage from '../UserPage/UserPage';
+import Dashboard from '../Dashboard/Dashboard';
+import CreateLessonPage from '../CreateLessonPage/CreateLessonPage';
 import './App.css';
 
 class App extends Component {
@@ -59,8 +60,8 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
-              path="/info"
-              component={InfoPage}
+              path="/dashboard"
+              component={Dashboard}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will
@@ -83,6 +84,11 @@ class App extends Component {
               path="/registration"
               component={RegisterPage}
               authRedirect="/user"
+            />
+            <ProtectedRoute
+              exact
+              path="/createlesson"
+              component={CreateLessonPage}
             />
             <ProtectedRoute
               // with authRedirect:

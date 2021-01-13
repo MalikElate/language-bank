@@ -24,7 +24,7 @@ class LandingPage extends Component {
           justify="center"
           alignItems="center" 
           direction="column"
-          style={{ backgroundImage: "url('./images/image100.png')", }}
+          // style={{ backgroundImage: "url('./images/image100.png')", }}
           > 
           <Grid
           item lg={12} sm={12} xs={12}
@@ -36,7 +36,7 @@ class LandingPage extends Component {
           item lg={12} sm={12} xs={12}
           >
             <Button variant="contained">Take a lesson</Button>
-            <Button variant="contained" color="">Create a lesson</Button>
+            <Button variant="contained" >Create a lesson</Button>
           </Grid>
         </Grid>
     );
