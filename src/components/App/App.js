@@ -21,6 +21,7 @@ import UserPage from '../UserPage/UserPage';
 import Dashboard from '../Dashboard/Dashboard';
 import CreateLessonPage from '../CreateLessonPage/CreateLessonPage';
 import LessonDetails from '../LessonDetails/LessonDetails'; 
+import AddQuestion from '../AddQuestionsPage/AddQuestionPage'; 
 import './App.css';
 
 class App extends Component {
@@ -83,8 +84,23 @@ class App extends Component {
               />
               )
             }
+            <ProtectedRoute
+              exact
+              path="/createlesson"
+              component={CreateLessonPage}
+            />
+            
+            { 
+              this.props.reduxState.lesson.allUserLessons.map((lesson, i) => 
+                <ProtectedRoute
+                key={i}
+                exact
+                path="/addquestions"
+                component={()=><AddQuestion/>}
+                />
+              )
+            }
 
-             
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -106,13 +122,7 @@ class App extends Component {
               component={RegisterPage}
               authRedirect="/user"
             />
-            <ProtectedRoute
-              exact
-              path="/createlesson"
-              component={CreateLessonPage}
-            />
             
-
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

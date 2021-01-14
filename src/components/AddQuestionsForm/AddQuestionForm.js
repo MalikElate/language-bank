@@ -5,7 +5,8 @@ import {
   withStyles,
   Typography, 
   TextField, 
-  Button
+  Button, 
+  Checkbox
  } from '@material-ui/core';
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -39,29 +40,39 @@ class CreateLesson extends Component {
   }
 
   submit = () => { 
-    // this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson}); 
-    this.props.history.push('/addquestions')
+    this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson}); 
   }
 
   render() {
     const { classes } = this.props; 
     return (
       <Grid> 
-        <Typography variant="h4">Create a lesson </Typography>
+        <Typography variant="h4">Hello from add question page</Typography>
         <Grid  
           container
           direction="column"
           justify="center"
           alignItems="center" 
-          > 
-          <TextField label="Lesson Name" variant="outlined" style={{display: "block"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'lessonName')}/>
-          <TextField label="Language" variant="outlined" style={{display: "block"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'language')}/>
-          <TextField label="Description" variant="outlined" style={{display: "block"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'description')}/>
-          <TextField label="Notes" variant="outlined" style={{display: "block"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'notes')}/>
+          >
+        <Grid  
+          container
+          direction="row"
+          justify="center"
+        >
+          <TextField label="Question" variant="outlined" style={{display: "block"}} />
+          <Button variant="contained">Delete Question</Button>
+        </Grid> 
+        <Grid  
+          container
+          direction="row"
+          justify="center"
+        >
+          <TextField label="Answer" variant="outlined" style={{display: "block"}} />
+          <Checkbox/>
+          <Button variant="contained">save answer</Button>
+        </Grid>
+          <Button variant="contained">Add answer</Button>
+          <Button variant="contained">Add question</Button>
         </Grid> 
         <Grid className={classes.submitButton}>
           <Button style={{marginRight: "1000"}} variant="contained" onClick={this.submit}>Submit</Button>
