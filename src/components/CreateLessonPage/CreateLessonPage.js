@@ -57,7 +57,7 @@ class CreateLesson extends Component {
 
   render() {
     const { classes } = this.props; 
-    let submitButton = <Button style={{marginRight: "1000"}} variant="contained" onClick={this.submit}>Submit</Button>
+    let submitButton = <Button style={{marginRight: "1000"}} variant="contained" onClick={this.submit}>Next</Button>
     let createButton = <Button style={{marginRight: "1000"}} variant="contained" onClick={this.create}>Create</Button>
     if (this.state.lessonCreated === false) { 
       submitButton = <div></div>

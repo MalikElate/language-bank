@@ -27,7 +27,7 @@ import './App.css';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
-    this.props.dispatch({type: "GET_ALL_LESSONS"}); 
+    this.props.dispatch({type: "GET_ALL_LESSONS"});  
   }
 
   render() {
@@ -96,7 +96,7 @@ class App extends Component {
                 key={i}
                 exact
                 path={`/addquestions/${lesson.id}`}
-                component={()=><AddQuestion/>}
+                component={()=><AddQuestion lesson={lesson}/>}
                 />
               )
             }
