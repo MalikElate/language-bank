@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   // Add query to get all lessons for a specific user
   let userId = req.user.id; 
-  console.log(req.user.id); 
+  console.log('Getting lessons for user with id:', req.user.id); 
   let queryText = 'SELECT * from "lesson" WHERE lesson_owner_id = $1;'; 
   pool.query(queryText, [userId])
   .then( (result) => {

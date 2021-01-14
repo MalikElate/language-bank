@@ -26,6 +26,7 @@ import './App.css';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({type: "GET_ALL_LESSONS"}); 
   }
 
   render() {
@@ -71,13 +72,19 @@ class App extends Component {
               exact
               path="/dashboard"
               component={Dashboard}
-            />
-             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/lessondetails"
-              component={LessonDetails}
-            />
+            /> 
+            { 
+              this.props.reduxState.lesson.allUserLessons.map((lesson, i) => 
+                <ProtectedRoute
+                key={i}
+                exact
+                path={`/lessondetails/${lesson.id}`}
+                component={()=><LessonDetails lesson={lesson}/>}
+              />
+              )
+            }
+
+             
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -116,5 +123,8 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = reduxState => ({
+  reduxState
+});
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
