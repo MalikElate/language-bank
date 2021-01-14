@@ -22,7 +22,7 @@ class CreateLesson extends Component {
   componentDidMount() { 
     // this.props.dispatch({type: "GET_ALL_LESSONS"}); 
     console.log('----------------------------------------------COMPONENT MOUNTED ------------------------------------------------------')
-    // this.props.dispatch({type: 'GET_QUESTIONS_AND_ANSWERS', payload: this.props.lesson.id})            
+    this.props.dispatch({type: 'GET_QUESTIONS_AND_ANSWERS', payload: this.props.match.params.id})            
   } 
   // GET_QUESTIONS_AND_ANSWERS
   state = {
@@ -44,16 +44,19 @@ class CreateLesson extends Component {
 
   render() {
     const { classes } = this.props; 
+    console.log('---------------------------------', this.props.match.params.id);
+    console.log('---------------------------------', this.props.reduxState.question.currentLesson[1])
     return (
       <Grid> 
         <Typography variant="h4">Hello from add question page</Typography> 
-        {JSON.stringify(this.props.lesson)}
-        {JSON.stringify(this.props.reduxState.lesson.currentLesson)}
-        {/* {
-          this.props.lesson.map(
-            <p>test</p>
+        {/* {JSON.stringify(this.props)} */}
+        {JSON.stringify(this.props.params)}
+        {JSON.stringify(this.props.reduxState.question.currentLesson)}
+        {
+          this.props.reduxState.question.currentLesson.map((question, i) =>  
+            <AddQuestionForm key={i}/>
           )
-        } */}
+        }
           <Button variant="contained">Add question</Button>
           <Grid className={classes.submitButton}>
             <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>

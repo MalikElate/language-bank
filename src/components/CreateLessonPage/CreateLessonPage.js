@@ -48,7 +48,7 @@ class CreateLesson extends Component {
     if (this.state.newLesson.description === '') { 
       alert('please add a lesson name or language')
     } else { 
-      this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson}); 
+      this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson});
       this.setState({
         lessonCreated: true
       })

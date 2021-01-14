@@ -90,16 +90,12 @@ class App extends Component {
               component={CreateLessonPage}
             />
             
-            { 
-              this.props.reduxState.lesson.allUserLessons.map((lesson, i) => 
-                <ProtectedRoute
-                key={i}
+            
+              <ProtectedRoute
                 exact
-                path={`/addquestions/${lesson.id}`}
-                component={()=><AddQuestion lesson={lesson}/>}
-                />
-              )
-            }
+                path={`/addquestions/:id`}
+                component={AddQuestion}
+                />           
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
