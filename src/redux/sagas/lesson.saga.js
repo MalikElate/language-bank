@@ -6,6 +6,7 @@ function* addLesson(action) {
   try { 
     console.log('posting new lesson'); 
     yield axios.post('/api/lesson', action.payload);
+    yield put({type: 'GET_ALL_LESSONS'}); 
   } catch (error) {
     console.log('Error with new lesson post:', error);
   }

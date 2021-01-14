@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AddQuestionForm from '../AddQuestionsForm/AddQuestionForm';
+import AddQuestionForm from '../AddQuestionsForm/AddQuestionForm'; 
 import {
   Grid,
   withStyles,
@@ -22,14 +22,8 @@ const styles = {
 
 class CreateLesson extends Component {
   state = {
-    newLesson: { 
-      lesson_owner_id: this.props.reduxState.user.id,
-      lessonName: '', 
-      language: '', 
-      description: '', 
-      notes: ''
-    },
-  };
+    }
+
 
   handleChangeFor = (event, inputType) => { 
     this.setState({ 
@@ -48,33 +42,13 @@ class CreateLesson extends Component {
     const { classes } = this.props; 
     return (
       <Grid> 
-        <Typography variant="h4">Hello from add question page</Typography>
-        <Grid  
-          container
-          direction="column"
-          justify="center"
-          alignItems="center" 
-          >
-        <Grid  
-          container
-          direction="row"
-          justify="center"
-        >
-          <TextField label="Question" variant="outlined" style={{display: "block"}} />
-          <Button variant="contained">Delete Question</Button>
-        </Grid> 
-        <Grid  
-          container
-          direction="row"
-          justify="center"
-        >
-          <TextField label="Answer" variant="outlined" style={{display: "block"}} />
-          <Checkbox/>
-          <Button variant="contained">save answer</Button>
-        </Grid>
-          <Button variant="contained">Add answer</Button>
-          <Button variant="contained">Add question</Button>
-        </Grid> 
+        <Typography variant="h4">Hello from add question page</Typography> 
+
+        {
+          
+        }
+
+        <Button variant="contained">Add question</Button>
         <Grid className={classes.submitButton}>
           <Button style={{marginRight: "1000"}} variant="contained" onClick={this.submit}>Submit</Button>
         </Grid>

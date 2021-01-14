@@ -95,7 +95,7 @@ class App extends Component {
                 <ProtectedRoute
                 key={i}
                 exact
-                path="/addquestions"
+                path={`/addquestions/${lesson.id}`}
                 component={()=><AddQuestion/>}
                 />
               )
