@@ -29,20 +29,13 @@ class CreateLesson extends Component {
     const { classes } = this.props; 
     return (
       <Grid> 
+            HELLO FROM ADD ANSWER FORM 
         <Grid  
           container
           direction="column"
           justify="center"
           alignItems="center" 
           >
-        <Grid  
-          container
-          direction="row"
-          justify="center"
-        >
-          <TextField label="Question" variant="outlined" style={{display: "block"}} />
-          <Button variant="contained">Delete Question</Button>
-        </Grid> 
         <Grid  
           container
           direction="row"

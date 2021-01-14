@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AddQuestionForm from '../AddQuestionsForm/AddQuestionForm';
+import AddQuestionForm from '../AddQuestionsForm/AddQuestionForm'; 
 import {
   Grid,
   withStyles,
   Typography, 
-  TextField, 
   Button, 
-  Checkbox
  } from '@material-ui/core';
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -21,15 +19,15 @@ const styles = {
 }
 
 class CreateLesson extends Component {
+  componentDidMount() { 
+    // this.props.dispatch({type: "GET_ALL_LESSONS"}); 
+    console.log('----------------------------------------------COMPONENT MOUNTED ------------------------------------------------------')
+    this.props.dispatch({type: 'GET_QUESTIONS_AND_ANSWERS', payload: this.props.match.params.id})            
+  } 
+  // GET_QUESTIONS_AND_ANSWERS
   state = {
-    newLesson: { 
-      lesson_owner_id: this.props.reduxState.user.id,
-      lessonName: '', 
-      language: '', 
-      description: '', 
-      notes: ''
-    },
-  };
+    }
+
 
   handleChangeFor = (event, inputType) => { 
     this.setState({ 
@@ -46,38 +44,23 @@ class CreateLesson extends Component {
 
   render() {
     const { classes } = this.props; 
+    console.log('---------------------------------', this.props.match.params.id);
+    console.log('---------------------------------', this.props.reduxState.question.currentLesson[1])
     return (
       <Grid> 
-        <Typography variant="h4">Hello from add question page</Typography>
-        <Grid  
-          container
-          direction="column"
-          justify="center"
-          alignItems="center" 
-          >
-        <Grid  
-          container
-          direction="row"
-          justify="center"
-        >
-          <TextField label="Question" variant="outlined" style={{display: "block"}} />
-          <Button variant="contained">Delete Question</Button>
-        </Grid> 
-        <Grid  
-          container
-          direction="row"
-          justify="center"
-        >
-          <TextField label="Answer" variant="outlined" style={{display: "block"}} />
-          <Checkbox/>
-          <Button variant="contained">save answer</Button>
-        </Grid>
-          <Button variant="contained">Add answer</Button>
+        <Typography variant="h4">Hello from add question page</Typography> 
+        {/* {JSON.stringify(this.props)} */}
+        {JSON.stringify(this.props.params)}
+        {JSON.stringify(this.props.reduxState.question.currentLesson)}
+        {
+          this.props.reduxState.question.currentLesson.map((question, i) =>  
+            <AddQuestionForm key={i}/>
+          )
+        }
           <Button variant="contained">Add question</Button>
-        </Grid> 
-        <Grid className={classes.submitButton}>
-          <Button style={{marginRight: "1000"}} variant="contained" onClick={this.submit}>Submit</Button>
-        </Grid>
+          <Grid className={classes.submitButton}>
+            <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
+          </Grid>
       </Grid>
     );
   }

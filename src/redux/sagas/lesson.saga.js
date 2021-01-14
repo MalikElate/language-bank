@@ -6,6 +6,7 @@ function* addLesson(action) {
   try { 
     console.log('posting new lesson'); 
     yield axios.post('/api/lesson', action.payload);
+    yield put({type: 'GET_ALL_LESSONS'}); 
   } catch (error) {
     console.log('Error with new lesson post:', error);
   }
@@ -24,11 +25,23 @@ function* getAllLessons(){
   }
 }
 
+// Get all the added lessons for logged in user from the database
+function* getQuestionsAndAnswers(action){ 
+  try {
+      console.log(`Getting all questions and answers for lesson ${action.payload} from db`); 
+      const response = yield axios.get(`/api/lesson/${action.payload}`);
+      yield put({type: 'SET_CURRENT_LESSON', payload: response.data}); 
+  }
+  catch (error) {
+      console.log('error with test gif get request', error);
+  }
+}
+
 // aggregate all the sagas for the export 
 function* lessonSaga() {
   yield takeLatest('ADD_LESSON', addLesson);
   yield takeLatest('GET_ALL_LESSONS', getAllLessons);
-  // yield takeLatest('LOGOUT', logoutUser); 
+  yield takeLatest('GET_QUESTIONS_AND_ANSWERS', getQuestionsAndAnswers)
 }
 
 export default lessonSaga;
