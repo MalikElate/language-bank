@@ -31,6 +31,7 @@ class CreateLesson extends Component {
 
     addQuestion = () => { 
     console.log('adding new question'); 
+    this.props.dispatch({type: 'ADD_QUESTION'}); 
   }
 
   submit = () => { 
