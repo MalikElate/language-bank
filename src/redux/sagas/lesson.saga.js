@@ -26,14 +26,25 @@ function* getAllLessons(){
 }
 
 // Get all the added lessons for logged in user from the database
-function* getQuestionsAndAnswers(action){ 
+function* getQuestions(action){ 
   try {
-      console.log(`Getting all questions and answers for lesson ${action.payload} from db`); 
-      const response = yield axios.get(`/api/lesson/${action.payload}`);
-      yield put({type: 'SET_CURRENT_LESSON', payload: response.data}); 
+      console.log(`Getting all questions for lesson ${action.payload} from db`); 
+      const response = yield axios.get(`/api/lesson/questions/${action.payload}`);
+      yield put({type: 'SET_QUESTION', payload: response.data}); 
   }
   catch (error) {
       console.log('error with test gif get request', error);
+  }
+}
+function* getAnswers(action){ 
+  try {
+      console.log(`Getting all answers for questions ${action.payload} from db`); 
+      const response = yield axios.get(`/api/lesson/answers/${action.payload}`);
+      yield put({type: 'SET_ANSWER', payload: response.data}); 
+      console.log('response from answer get request', response.data)
+    }
+  catch (error) {
+      console.log('error with get request answer request', error);
   }
 }
 
@@ -41,7 +52,8 @@ function* getQuestionsAndAnswers(action){
 function* lessonSaga() {
   yield takeLatest('ADD_LESSON', addLesson);
   yield takeLatest('GET_ALL_LESSONS', getAllLessons);
-  yield takeLatest('GET_QUESTIONS_AND_ANSWERS', getQuestionsAndAnswers)
+  yield takeLatest('GET_QUESTIONS', getQuestions)
+  yield takeLatest('GET_ANSWERS', getAnswers)
 }
 
 export default lessonSaga;

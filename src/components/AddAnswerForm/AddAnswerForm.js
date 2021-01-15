@@ -21,10 +21,6 @@ const styles = {
 
 class CreateLesson extends Component {
 
-  submit = () => { 
-    this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson}); 
-  }
-
   render() {
     const { classes } = this.props; 
     return (

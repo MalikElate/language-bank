@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AddQuestionForm from '../AddQuestionsForm/AddQuestionForm'; 
+import AddQuestionForm from '../AddQuestionsForm/AddQuestionForm';
 import {
   Grid,
   withStyles,
@@ -22,7 +22,7 @@ class CreateLesson extends Component {
   componentDidMount() { 
     // this.props.dispatch({type: "GET_ALL_LESSONS"}); 
     console.log('----------------------------------------------COMPONENT MOUNTED ------------------------------------------------------')
-    this.props.dispatch({type: 'GET_QUESTIONS_AND_ANSWERS', payload: this.props.match.params.id})            
+    this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id})            
   } 
   // GET_QUESTIONS_AND_ANSWERS
   state = {
@@ -44,17 +44,16 @@ class CreateLesson extends Component {
 
   render() {
     const { classes } = this.props; 
-    console.log('---------------------------------', this.props.match.params.id);
-    console.log('---------------------------------', this.props.reduxState.question.currentLesson[1])
     return (
       <Grid> 
         <Typography variant="h4">Hello from add question page</Typography> 
         {/* {JSON.stringify(this.props)} */}
-        {JSON.stringify(this.props.params)}
-        {JSON.stringify(this.props.reduxState.question.currentLesson)}
+        {/* {JSON.stringify(this.props.params)} */}
+        {JSON.stringify(this.props.reduxState.question.currentLessonAnswers)}
+        {/* {JSON.stringify(this.props.reduxState.question.currentLessonQuestions)} */}
         {
-          this.props.reduxState.question.currentLesson.map((question, i) =>  
-            <AddQuestionForm key={i}/>
+          this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
+            <AddQuestionForm key={i} question={question}/>
           )
         }
           <Button variant="contained">Add question</Button>

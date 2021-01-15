@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import AddAnswerForm from '../AddAnswerForm/AddAnswerForm'; 
 import {
   Grid,
   withStyles,
-  Typography, 
   TextField, 
   Button, 
   Checkbox
@@ -21,14 +21,15 @@ const styles = {
 
 class CreateLesson extends Component {
 
-  submit = () => { 
-    this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson}); 
+  componentDidMount() { 
+    this.props.dispatch({type: 'GET_ANSWERS', payload: this.props.question.id})   
   }
 
-  render() {
+    render() {
     const { classes } = this.props; 
     return (
       <Grid> 
+        {JSON.stringify(this.props.question)}
         <Grid  
           container
           direction="column"
@@ -47,10 +48,12 @@ class CreateLesson extends Component {
           container
           direction="row"
           justify="center"
-        >
-          <TextField label="Answer" variant="outlined" style={{display: "block"}} />
-          <Checkbox/>
-          <Button variant="contained">save answer</Button>
+        > 
+          {/* {
+            this.props.question.map((question) => 
+              <p>test</p>
+            )
+          } */}
         </Grid>
           <Button variant="contained">Add answer</Button>
         </Grid>  
