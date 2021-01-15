@@ -2,9 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+//  Get the answers for a specific question 
 router.get('/:questionId', (req, res) => {
-
-  // Add query to get all questions and answers for a specific user 
   console.log('getting answer for question with id:', req.params.questionId); 
   let questionId = req.params.questionId;
   let queryText = `SELECT answer.answer, answer.question_id FROM "answer" 
@@ -20,5 +19,22 @@ router.get('/:questionId', (req, res) => {
       res.sendStatus(500);
   });
 }); 
+
+// POST a new answer for a question
+router.post('/', (req, res) => {
+  console.log('POSTING answer for question with id:', req.body.questionId);  
+  let questionId = req.body.questionId;
+  let queryText = `INSERT INTO "answer" ( "answer", "question_id") 
+  VALUES ('inserted question', $1);`; 
+  pool.query(queryText, [questionId])
+  .then( (result) => {
+      res.sendStatus(201); 
+  })
+  .catch( (error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+  });
+}); 
+
 
 module.exports = router;

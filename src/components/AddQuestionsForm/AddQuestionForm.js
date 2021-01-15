@@ -41,8 +41,13 @@ class CreateLesson extends Component {
   }
 
   deleteQuestion = () => { 
-    console.log('deleting question', this.props.question.id); 
-    this.props.dispatch({type: 'DELETE_QUESTION', payload: this.props.question.id})
+    console.log('DELETING question', this.props.question.id); 
+    this.props.dispatch({type: 'DELETE_QUESTION', payload: this.props.question.id}); 
+  }
+
+  addAnswer = () => { 
+    console.log('POSTING answer to question with id:', this.props.question.id); 
+    this.props.dispatch({type: 'ADD_ANSWER', payload: this.props.question.id});
   }
 
     render() {
@@ -75,7 +80,7 @@ class CreateLesson extends Component {
             )
           }
         </Grid>
-          <Button variant="contained">Add answer</Button>
+          <Button variant="contained" onClick={this.addAnswer}>Add answer</Button>
         </Grid>  
       </Grid>
     );
