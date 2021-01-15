@@ -1,4 +1,3 @@
-
 const express = require('express');
 require('dotenv').config();
 
@@ -11,6 +10,8 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const lessonRouter = require('./routes/lesson.router');
+const questionRouter = require('./routes/question.router'); 
+const answerRouter = require('./routes/answer.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -26,6 +27,8 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/lesson', lessonRouter);
+app.use('/api/question', questionRouter);
+app.use('/api/answer', answerRouter);
 
 // Serve static files
 app.use(express.static('build'));

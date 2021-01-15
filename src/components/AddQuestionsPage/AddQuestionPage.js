@@ -29,13 +29,8 @@ class CreateLesson extends Component {
     }
 
 
-  handleChangeFor = (event, inputType) => { 
-    this.setState({ 
-      newLesson: {
-        ...this.state.newLesson, 
-        [inputType]: event.target.value
-      }
-    })
+    addQuestion = () => { 
+    console.log('adding new question'); 
   }
 
   submit = () => { 
@@ -56,7 +51,7 @@ class CreateLesson extends Component {
             <AddQuestionForm key={i} question={question}/>
           )
         }
-          <Button variant="contained">Add question</Button>
+          <Button variant="contained" onClick={this.addQuestion}>Add question</Button>
           <Grid className={classes.submitButton}>
             <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
           </Grid>

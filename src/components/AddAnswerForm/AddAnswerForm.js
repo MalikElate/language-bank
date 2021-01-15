@@ -41,7 +41,6 @@ class CreateLesson extends Component {
           <Checkbox/>
           <Button variant="contained">save answer</Button>
         </Grid>
-          <Button variant="contained">Add answer</Button>
         </Grid>  
       </Grid>
     );
