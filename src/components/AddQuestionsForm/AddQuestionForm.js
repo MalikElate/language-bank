@@ -40,6 +40,11 @@ class CreateLesson extends Component {
       })
   }
 
+  deleteQuestion = () => { 
+    console.log('deleting question', this.props.question.id); 
+    this.props.dispatch({type: 'DELETE_QUESTION', payload: this.props.question.id})
+  }
+
     render() {
     const { classes } = this.props; 
     return (
@@ -57,7 +62,7 @@ class CreateLesson extends Component {
           justify="center"
         >
           <TextField label="Question" variant="outlined" style={{display: "block"}} />
-          <Button variant="contained">Delete Question</Button>
+          <Button variant="contained" onClick={this.deleteQuestion}>Delete Question</Button>
         </Grid> 
         <Grid  
           container

@@ -26,12 +26,17 @@ class CreateLesson extends Component {
   } 
   // GET_QUESTIONS_AND_ANSWERS
   state = {
+      addedQuestion: false
     }
 
 
     addQuestion = () => { 
     console.log('adding new question'); 
-    this.props.dispatch({type: 'ADD_QUESTION'}); 
+    this.props.dispatch({type: 'ADD_QUESTION', payload: this.props.match.params.id}); 
+    this.forceUpdate()
+    // this.setState({
+    //   addedQuestion: true
+    // })
   }
 
   submit = () => { 
@@ -39,13 +44,14 @@ class CreateLesson extends Component {
   }
 
   render() {
+    console.log(this.state.addedQuestion)
     const { classes } = this.props; 
     return (
       <Grid> 
         <Typography variant="h4">Hello from add question page</Typography> 
         {/* {JSON.stringify(this.props)} */}
         {/* {JSON.stringify(this.props.params)} */}
-        {JSON.stringify(this.props.reduxState.question.currentLessonAnswers)}
+        {/* {JSON.stringify(this.props.reduxState.question.currentLessonQuestions)} */}
         {/* {JSON.stringify(this.props.reduxState.question.currentLessonQuestions)} */}
         {
           this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  

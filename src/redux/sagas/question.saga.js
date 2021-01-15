@@ -16,7 +16,19 @@ function* getQuestions(action){
 function* addQuestion(action){ 
   try {
       console.log(`Posting a new question for lesson ${action.payload}`); 
-      const response = yield axios.post(`/api/lesson/questions/${action.payload}`);
+      const response = yield axios.post(`/api/question/${action.payload}`);
+      console.log(response)
+  }
+  catch (error) {
+      console.log('error with test gif get request', error);
+  }
+}
+
+function* deleteQuestion(action){ 
+  try {
+      console.log(`DELETING a new question for lesson ${action.payload}`); 
+      const response = yield axios.delete(`/api/question/${action.payload}`);
+      console.log(response)
   }
   catch (error) {
       console.log('error with test gif get request', error);
@@ -27,6 +39,7 @@ function* addQuestion(action){
 function* questionSaga() {
   yield takeLatest('GET_QUESTIONS', getQuestions);
   yield takeLatest('ADD_QUESTION', addQuestion);
+  yield takeLatest('DELETE_QUESTION', deleteQuestion);
 }
 
 export default questionSaga;
