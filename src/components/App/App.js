@@ -59,14 +59,14 @@ class App extends Component {
               path="/user"
               component={UserPage}
             />
-            <ProtectedRoute
+            <Route
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/user"
+              // authRedirect="/user"
             />
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
@@ -84,6 +84,7 @@ class App extends Component {
               />
               )
             }
+
             <ProtectedRoute
               exact
               path="/createlesson"

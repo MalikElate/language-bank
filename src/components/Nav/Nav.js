@@ -25,7 +25,7 @@ const Nav = (props) => {
   return (
     <Grid className="nav">
       <Link to="/home">
-        <Typography variant="h2" className="nav-title"> Topo</Typography>
+        <Typography variant="h4" className="nav-title"> LanguageBank</Typography>
       </Link>
       <Grid className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
