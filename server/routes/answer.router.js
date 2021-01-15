@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/:questionId', (req, res) => {
   console.log('getting answer for question with id:', req.params.questionId); 
   let questionId = req.params.questionId;
-  let queryText = `SELECT answer.answer, answer.question_id FROM "answer" 
+  let queryText = `SELECT answer.answer, answer.id FROM "answer" 
   JOIN "question" ON question.id = answer.question_id
   WHERE question.id = $1;`; 
   pool.query(queryText, [questionId])
@@ -36,5 +36,20 @@ router.post('/', (req, res) => {
   });
 }); 
 
+router.delete('/:answerId', (req, res) => {
+  console.log('DELETING answer with id:', req.params.answerId);  
+  console.log('DELETING answer with id:', req.params);  
+  let answerId = req.params.answerId;
+  let queryText = `DELETE FROM "answer" WHERE answer.id = $1;`; 
+  pool.query(queryText, [answerId])
+  .then( (result) => {
+      res.sendStatus(200); 
+      console.log(result)
+  })
+  .catch( (error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+  });
+}); 
 
 module.exports = router;

@@ -21,7 +21,7 @@ const styles = {
 class CreateLesson extends Component {
   componentDidMount() { 
     // this.props.dispatch({type: "GET_ALL_LESSONS"}); 
-    console.log('----------------------------------------------COMPONENT MOUNTED ------------------------------------------------------')
+    console.log('----------------------------------------------COMPONENT QUESTION  MOUNTED ------------------------------------------------------')
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id})            
   } 
   // GET_QUESTIONS_AND_ANSWERS
@@ -33,14 +33,11 @@ class CreateLesson extends Component {
     addQuestion = () => { 
     console.log('adding new question'); 
     this.props.dispatch({type: 'ADD_QUESTION', payload: this.props.match.params.id}); 
-    this.forceUpdate()
-    // this.setState({
-    //   addedQuestion: true
-    // })
   }
 
   submit = () => { 
-    this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson}); 
+    // this.props.dispatch({type: 'ADD_LESSON', payload: this.state.newLesson}); 
+    this.props.history.push(`/lesson/details/${this.props.match.params.id}`); 
   }
 
   render() {
@@ -48,11 +45,7 @@ class CreateLesson extends Component {
     const { classes } = this.props; 
     return (
       <Grid> 
-        <Typography variant="h4">Hello from add question page</Typography> 
-        {/* {JSON.stringify(this.props)} */}
-        {/* {JSON.stringify(this.props.params)} */}
-        {/* {JSON.stringify(this.props.reduxState.question.currentLessonQuestions)} */}
-        {/* {JSON.stringify(this.props.reduxState.question.currentLessonQuestions)} */}
+        <Typography variant="h4">Add Questions</Typography> 
         {
           this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
             <AddQuestionForm key={i} question={question}/>

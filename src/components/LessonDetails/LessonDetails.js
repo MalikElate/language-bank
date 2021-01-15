@@ -10,14 +10,13 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class LessonDetails extends Component {
   state = {
-    heading: 'Lesson Details page',
+    heading: 'Lesson Details page for lesson id:',
   };
 
   render() {
     return (
       <div>
-        <h2>{this.state.heading}</h2> 
-        {this.props.lesson.id}
+        <h2>{this.state.heading} {this.props.lesson.id}</h2> 
       </div>
     );
   }

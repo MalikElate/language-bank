@@ -79,7 +79,7 @@ class App extends Component {
                 <ProtectedRoute
                 key={i}
                 exact
-                path={`/lessondetails/${lesson.id}`}
+                path={`/lesson/details/${lesson.id}`}
                 component={()=><LessonDetails lesson={lesson}/>}
               />
               )

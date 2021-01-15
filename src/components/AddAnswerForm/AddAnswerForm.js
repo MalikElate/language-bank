@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   Grid,
   withStyles,
-  Typography, 
   TextField, 
   Button, 
   Checkbox
@@ -20,12 +19,20 @@ const styles = {
 }
 
 class CreateLesson extends Component {
+  componentDidMount() { 
+    console.log('mounted answer form')
+  }
+
+  deleteAnswer = () => { 
+    console.log('deleting answer'); 
+    this.props.dispatch({type: 'DELETE_ANSWER', payload: this.props.answer.id})
+  }
 
   render() {
     const { classes } = this.props; 
     return (
       <Grid> 
-            HELLO FROM ADD ANSWER FORM 
+            {JSON.stringify(this.props.answer)}
         <Grid  
           container
           direction="column"
@@ -39,7 +46,7 @@ class CreateLesson extends Component {
         >
           <TextField label="Answer" variant="outlined" style={{display: "block"}} />
           <Checkbox/>
-          <Button variant="contained">save answer</Button>
+          <Button variant="contained" onClick={this.deleteAnswer}>delete answer</Button>
         </Grid>
         </Grid>  
       </Grid>

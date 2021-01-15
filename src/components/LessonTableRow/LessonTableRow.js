@@ -15,7 +15,7 @@ class LessonTableRow extends Component {
 
   goToDetails = () => { 
     console.log('going to details page for lesson with id', this.props.lesson.id); 
-    this.props.history.push(`/lessondetails/${this.props.lesson.id}`);
+    this.props.history.push(`/lesson/details/${this.props.lesson.id}`);
   }
 
   render() {

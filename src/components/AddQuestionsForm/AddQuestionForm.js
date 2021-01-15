@@ -7,7 +7,6 @@ import {
   withStyles,
   TextField, 
   Button, 
-  Checkbox
  } from '@material-ui/core';
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -21,16 +20,20 @@ const styles = {
 }
 
 class CreateLesson extends Component {
-
-  state = { 
-    answers: []
+  
+  componentDidMount() { 
+   this.getAnswers(); 
+   console.log('mounting add question form')
   }
 
-  componentDidMount() { 
-    // this.props.dispatch({type: 'GET_ANSWERS', payload: this.props.question.id})  
+  state = { 
+    answers: [], 
+    remountKey: (new Date()).getTime(),
+  }
+
+  getAnswers = () => { 
     axios.get(`/api/answer/${this.props.question.id}`)
       .then((response => { 
-        console.log('getting answer for question', this.props.question.id, response.data); 
         this.setState({ 
           answers: response.data
         })
@@ -48,6 +51,10 @@ class CreateLesson extends Component {
   addAnswer = () => { 
     console.log('POSTING answer to question with id:', this.props.question.id); 
     this.props.dispatch({type: 'ADD_ANSWER', payload: this.props.question.id});
+    this.setState({
+      remountKey: this.state.remountKey,
+    });
+    this.getAnswers();  
   }
 
     render() {
@@ -76,12 +83,13 @@ class CreateLesson extends Component {
         > 
           {
             this.state.answers.map((answer, i) => 
-              <AddAnswerForm key={i} answer={answer}/>
+              <AddAnswerForm key={this.state.remountKey + i} answer={answer}/>
             )
           }
         </Grid>
-          <Button variant="contained" onClick={this.addAnswer}>Add answer</Button>
+          <Button variant="contained" onClick={this.addAnswer}>Add answer</Button> 
         </Grid>  
+        <div>{this.state.remountKey} {JSON.stringify(this.state.answers)}</div>
       </Grid>
     );
   }
