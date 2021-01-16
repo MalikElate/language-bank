@@ -46,7 +46,10 @@ class CreateLesson extends Component {
 
   deleteQuestion = () => { 
     console.log('DELETING question', this.props.question.id); 
-    this.props.dispatch({type: 'DELETE_QUESTION', payload: this.props.question.id}); 
+    this.props.dispatch({
+      type: 'DELETE_QUESTION', payload: {
+        questionId: this.props.question.id, lessonId: this.props.question.lesson_id 
+      }}); 
   }
 
   addAnswer = () => { 

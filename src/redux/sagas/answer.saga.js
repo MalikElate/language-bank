@@ -15,7 +15,7 @@ function* deleteAnswer(action) {
   try { 
     console.log('--------DELETING answer----------------', action.payload); 
     yield axios.delete(`/api/answer/${action.payload}`);
-  //   yield put({type: 'GET_ALL_LESSONS'}); 
+    yield put({type: 'GET_ALL_LESSONS'}); 
   } catch (error) {
     console.log('Error with new lesson post:', error);
   }
