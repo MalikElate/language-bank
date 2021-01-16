@@ -21,11 +21,14 @@ const styles = {
 
 class CreateLesson extends Component {
   deleteAnswer = () => {  
-    this.props.dispatch({type: 'DELETE_ANSWER', payload: this.props.answer.id})
+    this.props.dispatch({type: 'DELETE_ANSWER', payload:{ 
+      answerId: this.props.answer.id, lessonId: this.props.reduxState.question.currentLessonQuestions[0].lesson_id
+    }})
   }
 
   render() {
     const { classes } = this.props; 
+    console.log('render')
     return (
       <Grid> 
         <Grid  

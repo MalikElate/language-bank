@@ -31,8 +31,9 @@ class CreateLesson extends Component {
   }
 
   addAnswer = () => { 
-    console.log('POSTING answer to question with id:', this.props.question.id); 
-    this.props.dispatch({type: 'ADD_ANSWER', payload: this.props.question.id});
+    this.props.dispatch({type: 'ADD_ANSWER', payload:{ 
+      questionId: this.props.question.id, lessonId: this.props.question.lesson_id 
+    }});
   }
 
     render() {
