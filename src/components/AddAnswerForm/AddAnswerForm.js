@@ -4,6 +4,7 @@ import {
   Grid,
   withStyles,
   TextField, 
+  Typography,
   Button, 
   Checkbox
  } from '@material-ui/core';
@@ -19,20 +20,15 @@ const styles = {
 }
 
 class CreateLesson extends Component {
-  componentDidMount() { 
-    console.log('mounted answer form')
-  }
-
-  deleteAnswer = () => { 
-    console.log('deleting answer'); 
+  deleteAnswer = () => {  
     this.props.dispatch({type: 'DELETE_ANSWER', payload: this.props.answer.id})
   }
 
   render() {
+    console.log("rendering")
     const { classes } = this.props; 
     return (
       <Grid> 
-            {JSON.stringify(this.props.answer)}
         <Grid  
           container
           direction="column"
@@ -44,7 +40,7 @@ class CreateLesson extends Component {
           direction="row"
           justify="center"
         >
-          <TextField label="Answer" variant="outlined" style={{display: "block"}} />
+          <Typography variant="body1">{this.props.answer.answer}</Typography>
           <Checkbox/>
           <Button variant="contained" onClick={this.deleteAnswer}>delete answer</Button>
         </Grid>

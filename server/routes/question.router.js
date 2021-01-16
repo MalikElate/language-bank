@@ -23,11 +23,11 @@ router.get('/:lessonId', (req, res) => {
 
 router.post('/:lessonId', (req, res) => {
   // Add query to get all questions and answers for a specific user 
-  console.log('POSTING question for lesson with id:', req.params.lessonId); 
+  console.log(`POSTING question ${req.body.question} for lesson with id:, ${req.params.lessonId}`); 
   let lessonId = req.params.lessonId; 
   let queryText = `INSERT INTO "question" ( "question", "lesson_id") 
-  VALUES ('new question inserted with button', $1);`; 
-  pool.query(queryText, [lessonId])
+  VALUES ($1, $2);`; 
+  pool.query(queryText, [req.body.question, lessonId])
   .then( (result) => {
       res.sendStatus(201); 
   })

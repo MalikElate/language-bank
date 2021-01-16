@@ -16,8 +16,8 @@ function* getQuestions(action){
 function* addQuestion(action){ 
   try {
       console.log(`Posting a new question for lesson ${action.payload}`); 
-      const response = yield axios.post(`/api/question/${action.payload}`);
-      console.log(response)
+      const response = yield axios.post(`/api/question/${action.payload.lessonId}`, action.payload);
+      yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
       console.log('error with test gif get request', error);

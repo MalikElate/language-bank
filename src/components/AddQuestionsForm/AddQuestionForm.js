@@ -6,6 +6,7 @@ import {
   Grid,
   withStyles,
   TextField, 
+  Typography,
   Button, 
  } from '@material-ui/core';
 // Basic class component structure for React with default state
@@ -73,8 +74,9 @@ class CreateLesson extends Component {
           direction="row"
           justify="center"
         >
-          <TextField label="Question" variant="outlined" style={{display: "block"}} />
+          <Typography label="Question" variant="body1" style={{display: "block"}} >{this.props.question.question}</Typography>
           <Button variant="contained" onClick={this.deleteQuestion}>Delete Question</Button>
+          <Button variant="contained" onClick={this.deleteQuestion}>Edit Question</Button>
         </Grid> 
         <Grid  
           container
