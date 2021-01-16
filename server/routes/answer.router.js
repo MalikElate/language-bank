@@ -2,14 +2,15 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-//  Get the answers for a specific question 
+//  Get the answers for a specific lesson
 router.get('/:questionId', (req, res) => {
   console.log('getting answer for question with id:', req.params.questionId); 
-  let questionId = req.params.questionId;
-  let queryText = `SELECT answer.answer, answer.id FROM "answer" 
-  JOIN "question" ON question.id = answer.question_id
-  WHERE question.id = $1;`; 
-  pool.query(queryText, [questionId])
+  // let questionId = req.params.questionId;
+  let queryText = `SELECT * FROM "lesson" 
+  JOIN "question" ON question.lesson_id = lesson.id
+  JOIN "answer" ON answer.question_id = question.id
+  WHERE lesson.id = 36`; 
+  pool.query(queryText)
   .then( (result) => {
       console.log(result.rows)
       res.send(result.rows);

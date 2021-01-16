@@ -25,7 +25,6 @@ class CreateLesson extends Component {
   }
 
   render() {
-    console.log("rendering")
     const { classes } = this.props; 
     return (
       <Grid> 

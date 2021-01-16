@@ -40,7 +40,7 @@ class Dashboard extends Component {
           >
             <Typography variant="h3">Lessons</Typography> 
             <Button variant="contained"  onClick={() => {
-              this.props.history.push('/createlesson');
+              this.props.history.push('/create-lesson');
             }} >Create a lesson</Button>
           </Grid>
           <Grid

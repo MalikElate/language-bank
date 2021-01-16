@@ -29,6 +29,7 @@ class CreateLesson extends Component {
     // this.props.dispatch({type: "GET_ALL_LESSONS"}); 
     console.log('----------------------------------------------COMPONENT QUESTION  MOUNTED ------------------------------------------------------')
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id});
+    this.props.dispatch({type: 'GET_ANSWER', payload: this.props.match.params.id});
   } 
     
   // GET_QUESTIONS_AND_ANSWERS
@@ -42,8 +43,6 @@ class CreateLesson extends Component {
     addQuestion = () => { 
     this.props.dispatch({type: 'ADD_QUESTION', payload: this.state.newQuestion}); 
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id}); 
-    // this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id}); 
-    // this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id}); 
     this.setState({ 
       newQuestion: { 
         ...this.state.newQuestion,

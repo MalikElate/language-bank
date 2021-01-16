@@ -21,28 +21,6 @@ const styles = {
 }
 
 class CreateLesson extends Component {
-  
-  componentDidMount() { 
-   this.getAnswers(); 
-   console.log('mounting add question form')
-  }
-
-  state = { 
-    answers: [], 
-    remountKey: (new Date()).getTime(),
-  }
-
-  getAnswers = () => { 
-    axios.get(`/api/answer/${this.props.question.id}`)
-      .then((response => { 
-        this.setState({ 
-          answers: response.data
-        })
-      }))
-      .catch((error) => { 
-        console.log('error in answer get', error)
-      })
-  }
 
   deleteQuestion = () => { 
     console.log('DELETING question', this.props.question.id); 
@@ -55,17 +33,12 @@ class CreateLesson extends Component {
   addAnswer = () => { 
     console.log('POSTING answer to question with id:', this.props.question.id); 
     this.props.dispatch({type: 'ADD_ANSWER', payload: this.props.question.id});
-    this.setState({
-      remountKey: this.state.remountKey,
-    });
-    this.getAnswers();  
   }
 
     render() {
     const { classes } = this.props; 
     return (
       <Grid> 
-        {JSON.stringify(this.props.question)}
         <Grid  
           container
           direction="column"
@@ -86,15 +59,19 @@ class CreateLesson extends Component {
           direction="row"
           justify="center"
         > 
+        <div> 
+          {/* {JSON.stringify(this.props.reduxState.answer.currentLessonAnswers)} */}
+        </div>
           {
-            this.state.answers.map((answer, i) => 
-              <AddAnswerForm key={this.state.remountKey + i} answer={answer}/>
+           this.props.reduxState.answer.currentLessonAnswers.filter((answer) => {  
+              return this.props.question.id === answer.question_id 
+            }).map((answer, i) => 
+              <AddAnswerForm key={i} answer={answer}/> 
             )
           }
         </Grid>
           <Button variant="contained" onClick={this.addAnswer}>Add answer</Button> 
         </Grid>  
-        <div>{this.state.remountKey} {JSON.stringify(this.state.answers)}</div>
       </Grid>
     );
   }
@@ -104,4 +81,3 @@ const mapStateToProps = reduxState => ({
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(CreateLesson))
-
