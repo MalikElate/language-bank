@@ -9,7 +9,7 @@ function* getQuestions(action){
       yield put({type: 'SET_QUESTION', payload: response.data}); 
   }
   catch (error) {
-      console.log('error with test gif get request', error);
+      console.log('error with question GET request', error);
   }
 }
 
@@ -20,7 +20,7 @@ function* addQuestion(action){
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
-      console.log('error with test gif get request', error);
+      console.log('error with question POST request', error);
   }
 }
 
@@ -31,7 +31,19 @@ function* deleteQuestion(action){
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
-      console.log('error with test gif get request', error);
+      console.log('error with question DELETE request', error);
+  }
+}
+
+function* editQuestion(action){ 
+  try {
+      console.log(`EDITING a question for lesson ${action.payload.questionId}`); 
+      const response = yield axios.put(`/api/question/${action.payload.questionId}`, action.payload);
+      console.log(response)
+      yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
+  }
+  catch (error) {
+      console.log('error with question PUT request', error);
   }
 }
 
@@ -40,6 +52,7 @@ function* questionSaga() {
   yield takeLatest('GET_QUESTIONS', getQuestions);
   yield takeLatest('ADD_QUESTION', addQuestion);
   yield takeLatest('DELETE_QUESTION', deleteQuestion);
+  yield takeLatest('EDIT_QUESTION', editQuestion);
 }
 
 export default questionSaga;

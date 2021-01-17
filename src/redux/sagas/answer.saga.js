@@ -31,11 +31,23 @@ function* deleteAnswer(action) {
   }
 }
 
+// EDIT an answer in the db
+function* editAnswer(action) {
+  try { 
+    console.log('--------EDITING answer----------------', action.payload.answerId); 
+    yield axios.put(`/api/answer/${action.payload.answerId}`, action.payload);
+    yield put({type: 'GET_ANSWER', payload: action.payload.lessonId});
+  } catch (error) {
+    console.log('Error with new lesson PUT:', error);
+  }
+}
+
 // aggregate all the sagas for the export 
 function* answerSaga() {
     yield takeLatest('ADD_ANSWER', addAnswer)
     yield takeLatest('DELETE_ANSWER', deleteAnswer)
     yield takeLatest('GET_ANSWER', getAnswer)
+    yield takeLatest('EDIT_ANSWER', editAnswer)
 }
 
 export default answerSaga;

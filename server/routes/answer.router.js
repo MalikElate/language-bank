@@ -5,7 +5,6 @@ const router = express.Router();
 //  Get the answers for a specific lesson
 router.get('/:questionId', (req, res) => {
   console.log('getting answer for question with id:', req.params.questionId); 
-  // let questionId = req.params.questionId;
   let queryText = `SELECT * FROM "lesson" 
   JOIN "question" ON question.lesson_id = lesson.id
   JOIN "answer" ON answer.question_id = question.id
@@ -21,7 +20,7 @@ router.get('/:questionId', (req, res) => {
   });
 }); 
 
-// POST a new answer for a question
+// POST a new answer 
 router.post('/', (req, res) => {
   console.log('POSTING answer for question with id:', req.body.questionId);  
   let questionId = req.body.questionId;
@@ -38,6 +37,7 @@ router.post('/', (req, res) => {
   });
 }); 
 
+// DELETE answer already in the db
 router.delete('/:answerId', (req, res) => {
   console.log('DELETING answer with id:', req.params.answerId);  
   console.log('DELETING answer with id:', req.params);  
@@ -53,5 +53,22 @@ router.delete('/:answerId', (req, res) => {
       res.sendStatus(500);
   });
 }); 
+
+// UPDATE answer already in the db
+router.put('/:answerId', (req, res) => {
+  console.log('UPDATING answer with id:', req.body.questionId); 
+  let answerId = req.body.answerId; 
+  let answer = req.body.answer; 
+  let queryText = `UPDATE "answer" SET "answer" = $1 WHERE answer.id = $2;`; 
+  pool.query(queryText, [answer, answerId])
+  .then( (result) => {
+      res.sendStatus(200); 
+  })
+  .catch( (error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+  }); 
+});
+  
 
 module.exports = router;
