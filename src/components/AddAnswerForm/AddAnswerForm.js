@@ -28,26 +28,19 @@ class CreateLesson extends Component {
 
   render() {
     const { classes } = this.props; 
-    console.log('render')
     return (
-      <Grid> 
-        <Grid  
-          container
-          direction="column"
-          justify="center"
-          alignItems="center" 
-          >
+    
         <Grid  
           container
           direction="row"
           justify="center"
+          style={{margin: '5px'}}
         >
           <Typography variant="body1">{this.props.answer.answer}</Typography>
           <Checkbox/>
-          <Button variant="contained" onClick={this.deleteAnswer}>delete answer</Button>
-        </Grid>
+          <Button variant="contained" onClick={this.deleteAnswer}>delete</Button>
+          <Button variant="contained" style={{marginLeft: '10px'}}>edit</Button>
         </Grid>  
-      </Grid>
     );
   }
 }

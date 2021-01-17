@@ -69,12 +69,14 @@ class CreateLesson extends Component {
   render() {
     const { classes } = this.props; 
     return (
-      <Grid> 
+      // <Grid style={{textAlign: 'center', padding:'0%', margin: '0%'}} spacing={0} >
+      <>
         <Typography variant="h4">Add Questions</Typography> 
-        <Grid style={{textAlign: 'center', marginTop: '15%'}} >
-          <Box m={2} component="span">
+      <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}> 
+        <Grid style={{textAlign: 'center'}} >
+          <Box component="span">
             <TextField
-              style={{width: '500px', marginBottom: '5%', marginLeft: '10%'}}
+              style={{width: '75%', marginBottom: '5%'}}
               onChange={this.handleChangeQuestion}
               value={this.state.newQuestion.question}
             />
@@ -85,13 +87,14 @@ class CreateLesson extends Component {
         </Grid>
         {
           this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
-            <AddQuestionForm key={i} question={question}/>
+            <AddQuestionForm key={i} number={i + 1} question={question}/>
           )
         }
-        <Grid className={classes.submitButton}>
-          <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
-        </Grid>
+      </Box>
+      <Grid className={classes.submitButton}>
+        <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
       </Grid>
+      </>
     );
   }
 }

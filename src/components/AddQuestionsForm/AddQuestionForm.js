@@ -38,6 +38,7 @@ class CreateLesson extends Component {
 
     render() {
     const { classes } = this.props; 
+    console.log(this.props.key)
     return (
       <Grid> 
         <Grid  
@@ -49,20 +50,22 @@ class CreateLesson extends Component {
         <Grid  
           container
           direction="row"
-          justify="center"
-        >
-          <Typography label="Question" variant="body1" style={{display: "block"}} >{this.props.question.question}</Typography>
-          <Button variant="contained" onClick={this.deleteQuestion}>Delete Question</Button>
-          <Button variant="contained" onClick={this.deleteQuestion}>Edit Question</Button>
+          justify="flex-end"
+          style={{marginRight: 200}}
+        > 
+        <Grid xs={10} style={{textAlign: 'left', display: 'inline'}}>
+          <Typography label="Question" variant="body1" style={{display: "block"}} > 
+            {`${this.props.number}) ${this.props.question.question}`}
+          </Typography>
+        </Grid>
+          <Button variant="contained" onClick={this.deleteQuestion}>Delete</Button>
+          <Button variant="contained" style={{marginLeft:'10px'}} onClick={this.deleteQuestion}>Edit</Button>
         </Grid> 
         <Grid  
           container
           direction="row"
           justify="center"
         > 
-        <div> 
-          {/* {JSON.stringify(this.props.reduxState.answer.currentLessonAnswers)} */}
-        </div>
           {
            this.props.reduxState.answer.currentLessonAnswers.filter((answer) => {  
               return this.props.question.id === answer.question_id 
@@ -71,7 +74,7 @@ class CreateLesson extends Component {
             )
           }
         </Grid>
-          <Button variant="contained" onClick={this.addAnswer}>Add answer</Button> 
+          <Button variant="contained" style={{margin:'10px'}} onClick={this.addAnswer}>Add answer</Button> 
         </Grid>  
       </Grid>
     );
