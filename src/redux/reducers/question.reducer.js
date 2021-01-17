@@ -11,19 +11,8 @@ const currentLessonQuestions = (state = [], action) => {
     }
   };
 
-const currentLessonAnswers = (state = [], action) => {
-switch (action.type) {
-    case 'SET_ANSWER':
-    return [
-      ...state,
-      action.payload
-    ];
-    default:
-    return state;
-}
-};
 
 export default combineReducers({
-currentLessonQuestions,
-currentLessonAnswers
+  currentLessonQuestions,
+  // currentLessonAnswers
 });

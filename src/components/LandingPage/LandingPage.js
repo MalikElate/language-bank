@@ -29,14 +29,14 @@ class LandingPage extends Component {
           <Grid
           item lg={12} sm={12} xs={12}
           style={{ padding: 20}}>
-            <Typography variant="h1">LanguageBank</Typography> 
+            <Typography variant="h1">Topo</Typography> 
           </Grid>
           <Grid
           className={classes.buttonGrid}
           item lg={12} sm={12} xs={12}
           >
-            <Button variant="contained">Take a lesson</Button>
-            <Button variant="contained" >Create a lesson</Button>
+            <Button variant="contained" style={{marginRight: '50px'}}>Take a lesson</Button>
+            <Button variant="contained" style={{marginLeft: '50px'}}>Create a lesson</Button>
           </Grid>
         </Grid>
     );

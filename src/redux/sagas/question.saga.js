@@ -16,8 +16,8 @@ function* getQuestions(action){
 function* addQuestion(action){ 
   try {
       console.log(`Posting a new question for lesson ${action.payload}`); 
-      const response = yield axios.post(`/api/question/${action.payload}`);
-      console.log(response)
+      const response = yield axios.post(`/api/question/${action.payload.lessonId}`, action.payload);
+      yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
       console.log('error with test gif get request', error);
@@ -26,9 +26,9 @@ function* addQuestion(action){
 
 function* deleteQuestion(action){ 
   try {
-      console.log(`DELETING a new question for lesson ${action.payload}`); 
-      const response = yield axios.delete(`/api/question/${action.payload}`);
-      console.log(response)
+      console.log(`DELETING a new question for lesson ${action.payload.questionId}`); 
+      const response = yield axios.delete(`/api/question/${action.payload.questionId}`);
+      yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
       console.log('error with test gif get request', error);

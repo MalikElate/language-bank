@@ -4,6 +4,7 @@ import {
   Grid,
   withStyles,
   TextField, 
+  Typography,
   Button, 
   Checkbox
  } from '@material-ui/core';
@@ -19,37 +20,27 @@ const styles = {
 }
 
 class CreateLesson extends Component {
-  componentDidMount() { 
-    console.log('mounted answer form')
-  }
-
-  deleteAnswer = () => { 
-    console.log('deleting answer'); 
-    this.props.dispatch({type: 'DELETE_ANSWER', payload: this.props.answer.id})
+  deleteAnswer = () => {  
+    this.props.dispatch({type: 'DELETE_ANSWER', payload:{ 
+      answerId: this.props.answer.id, lessonId: this.props.reduxState.question.currentLessonQuestions[0].lesson_id
+    }})
   }
 
   render() {
     const { classes } = this.props; 
     return (
-      <Grid> 
-            {JSON.stringify(this.props.answer)}
-        <Grid  
-          container
-          direction="column"
-          justify="center"
-          alignItems="center" 
-          >
+    
         <Grid  
           container
           direction="row"
           justify="center"
+          style={{margin: '5px'}}
         >
-          <TextField label="Answer" variant="outlined" style={{display: "block"}} />
+          <Typography variant="body1">{this.props.answer.answer}</Typography>
           <Checkbox/>
-          <Button variant="contained" onClick={this.deleteAnswer}>delete answer</Button>
-        </Grid>
+          <Button variant="contained" onClick={this.deleteAnswer}>delete</Button>
+          <Button variant="contained" style={{marginLeft: '10px'}}>edit</Button>
         </Grid>  
-      </Grid>
     );
   }
 }

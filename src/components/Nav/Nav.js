@@ -25,10 +25,10 @@ const Nav = (props) => {
   return (
     <Grid className="nav">
       <Link to="/home">
-        <Typography variant="h4" className="nav-title"> LanguageBank</Typography>
+        <Typography variant="h3" className="nav-title"> Topo</Typography>
       </Link>
       <Grid className="nav-right">
-        <Link className="nav-link" to={loginLinkData.path}>
+        <Link className="nav-link" to="/home">
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}

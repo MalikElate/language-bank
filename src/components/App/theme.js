@@ -11,6 +11,9 @@ const theme = createMuiTheme({
             main: amber[500], 
             contrastText: deepPurple[900]
         }
+    }, 
+    pageHeader: { 
+        
     }
 }) 
 
