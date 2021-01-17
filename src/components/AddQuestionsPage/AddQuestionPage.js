@@ -40,7 +40,7 @@ class CreateLesson extends Component {
       }
     }
 
-    addQuestion = () => { 
+  addQuestion = () => { 
     this.props.dispatch({type: 'ADD_QUESTION', payload: this.state.newQuestion}); 
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id}); 
     this.setState({ 
@@ -72,11 +72,10 @@ class CreateLesson extends Component {
       // <Grid style={{textAlign: 'center', padding:'0%', margin: '0%'}} spacing={0} >
       <>
         <Typography variant="h4">Add Questions</Typography> 
-      <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}> 
         <Grid style={{textAlign: 'center'}} >
           <Box component="span">
             <TextField
-              style={{width: '75%', marginBottom: '5%'}}
+              style={{width: '72%', marginBottom: '5%'}}
               onChange={this.handleChangeQuestion}
               value={this.state.newQuestion.question}
             />
@@ -90,7 +89,6 @@ class CreateLesson extends Component {
             <AddQuestionForm key={i} number={i + 1} question={question}/>
           )
         }
-      </Box>
       <Grid className={classes.submitButton}>
         <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
       </Grid>

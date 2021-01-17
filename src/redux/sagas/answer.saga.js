@@ -14,7 +14,7 @@ function* getAnswer(action) {
 // POST a answer to the db
 function* addAnswer(action) {
     try { 
-      yield axios.post('/api/answer', {questionId: action.payload.questionId});
+      yield axios.post('/api/answer', {questionId: action.payload.questionId, answer: action.payload.answer});
       yield put({type: 'GET_ANSWER', payload: action.payload.lessonId});
     } catch (error) {
       console.log('Error with new lesson POST:', error);

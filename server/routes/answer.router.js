@@ -25,9 +25,10 @@ router.get('/:questionId', (req, res) => {
 router.post('/', (req, res) => {
   console.log('POSTING answer for question with id:', req.body.questionId);  
   let questionId = req.body.questionId;
+  let answer = req.body.answer;
   let queryText = `INSERT INTO "answer" ( "answer", "question_id") 
-  VALUES ('inserted question', $1);`; 
-  pool.query(queryText, [questionId])
+  VALUES ($1, $2);`; 
+  pool.query(queryText, [answer, questionId])
   .then( (result) => {
       res.sendStatus(201); 
   })
