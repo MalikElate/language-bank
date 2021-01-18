@@ -15,7 +15,9 @@ import {
  } from '@material-ui/core';
 
 const styles = { 
-  
+  grow: { 
+    flexGrow: 1
+  }
 }
 
 class Dashboard extends Component {
@@ -38,8 +40,11 @@ class Dashboard extends Component {
           item lg={12} sm={12} xs={12}
           style={{ padding: 20}}
           >
+            <Grid style={{textAlign: 'left', display: 'inline-block', marginRight: '60%'}}>
+            {/* ------------------------------- Gid containing delete, and edit or delete buttons----------------- */}
             <Typography variant="h3">Lessons</Typography> 
-            <Button variant="contained"  onClick={() => {
+            </Grid> 
+            <Button variant="contained" className={classes.grow} onClick={() => {  
               this.props.history.push('/create-lesson');
             }} >Create a lesson</Button>
           </Grid>

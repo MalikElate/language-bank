@@ -18,7 +18,7 @@ const Nav = (props) => {
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = '/user';
+    loginLinkData.path = '/home';
     loginLinkData.text = 'Home';
   }
 
@@ -28,7 +28,7 @@ const Nav = (props) => {
         <Typography variant="h3" className="nav-title"> Topo</Typography>
       </Link>
       <Grid className="nav-right">
-        <Link className="nav-link" to="/user">
+        <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
