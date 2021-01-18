@@ -17,6 +17,9 @@ import {
 const styles = { 
   submitButton: { 
     textAlign: "right"
+  },
+  grow: {
+    flexGrow: 1
   }
 }
 
@@ -82,7 +85,7 @@ class CreateLesson extends Component {
     })
   }
 
-    render() {
+  render() {
     const { classes } = this.props; 
     let question; 
     let questionSaveOrDeleteButton; 
@@ -92,11 +95,11 @@ class CreateLesson extends Component {
       questionSaveOrDeleteButton = <Button variant="contained" style={{marginLeft:'10px'}} onClick={() => {this.toggleEditMode(); this.save()}}>Save</Button> 
     }
     if (this.state.mode === 'display') { 
-      question = <Typography label="Question" variant="body1" style={{display: "block"}} > 
+      question = <Typography className={classes.grow} label="Question" variant="body1" style={{display: "block"}} > 
                     {`${this.props.number}) ${this.props.question.question}`}
                 </Typography>
     } else if (this.state.mode === 'edit') { 
-      question = <TextField style={{width: '100%', marginBottom: '5%'}} onChange={this.handleChangeForQuestion} value={this.state.questionEdit.question}/>
+      question = <TextField className={classes.grow} onChange={this.handleChangeForQuestion} value={this.state.questionEdit.question}/>
     }
     return (
       <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}> 
@@ -107,13 +110,12 @@ class CreateLesson extends Component {
           style={{marginRight: 200}}
         > 
             {question}
-          <Grid style={{textAlign: 'left', display: 'inline-block'}} justify="flex-end">
-            {/* ------------------------------- Gid containing delete and edit buttons ----------------------------- */}
+          <Grid style={{textAlign: 'left', display: 'inline-block', marginLeft: '10px'}}>
+            {/* ------------------------------- Gid containing delete, and edit or delete buttons----------------- */}
               <Button variant="contained" onClick={this.deleteQuestion}>Delete</Button>
               {questionSaveOrDeleteButton}
             </Grid> 
-            </Grid>
-            {/* ------------------------------- Gid containing the edit input and button ----------------------------- */}
+          </Grid>
           <Grid style={{textAlign: 'center', margin: '2%'}} >
           <Box component="span">
             <TextField
@@ -136,7 +138,7 @@ class CreateLesson extends Component {
           this.props.reduxState.answer.currentLessonAnswers.filter((answer) => {  
               return this.props.question.id === answer.question_id 
             }).map((answer, i) => 
-              <AddAnswerForm key={i} answer={answer}/> 
+              <AddAnswerForm key={i} order={i} answer={answer}/> 
             )
           }
         </Grid>
@@ -144,6 +146,7 @@ class CreateLesson extends Component {
     );
   }
 }
+
 const mapStateToProps = reduxState => ({
   reduxState
 });

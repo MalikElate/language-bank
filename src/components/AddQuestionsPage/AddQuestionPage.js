@@ -21,6 +21,9 @@ const styles = {
   }, 
   addButton: { 
     marginRight: "5%"
+  }, 
+  grow: { 
+    flexGrow: 1
   }
 }
 
@@ -84,11 +87,11 @@ class CreateLesson extends Component {
             <Button variant="contained" className="add-btn" onClick={this.addQuestion}>Add question</Button>
           </Box>
         </Grid>
-        {
-          this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
-            <AddQuestionForm key={i} number={i + 1} question={question}/>
-          )
-        }
+          {
+            this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
+              <AddQuestionForm key={i} number={i + 1} question={question}/>
+            )
+          }
       <Grid className={classes.submitButton}>
         <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
       </Grid>

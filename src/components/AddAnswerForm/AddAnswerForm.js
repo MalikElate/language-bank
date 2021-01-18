@@ -17,6 +17,9 @@ const styles = {
   submitButton: { 
     textAlign: "right"
   }, 
+  grow: { 
+    flexGrow: 1
+  }
 }
 
 class CreateLesson extends Component {
@@ -71,9 +74,9 @@ class CreateLesson extends Component {
       answerSaveOrDeleteButton = <Button variant="contained" style={{marginLeft:'10px'}} onClick={() => {this.toggleEditMode(); this.save()}}>Save</Button> 
     }
     if (this.state.mode === 'display') { 
-      answer = <Typography variant="body1">{this.props.answer.answer}</Typography>
+      answer = <Typography className={classes.grow} variant="body1">{this.props.reduxState.answer.orderAnswers[this.props.order]}) {this.props.answer.answer}</Typography>
     } else if (this.state.mode === 'edit') { 
-      answer = <TextField style={{width: '40%'}} onChange={this.handleChangeForQuestion} value={this.state.answerEdit.answer}/>
+          answer = <><TextField className={classes.grow} onChange={this.handleChangeForQuestion} value={this.state.answerEdit.answer}/><Checkbox/></>
     }
     return (
     
@@ -84,7 +87,6 @@ class CreateLesson extends Component {
           style={{margin: '5px'}}
         > 
           {answer}
-          <Checkbox/>
           <Button variant="contained" onClick={this.deleteAnswer}>delete</Button>
           {answerSaveOrDeleteButton}
         </Grid>  
