@@ -39,6 +39,9 @@ const Nav = (props) => {
           <>
             <Link className="nav-link" to="/dashboard">
               DashBoard
+            </Link>  
+            <Link className="nav-link" to="/take-lesson">
+              Take a lesson
             </Link>
             <LogOutButton className="nav-link" />
           </>

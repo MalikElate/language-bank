@@ -71,11 +71,20 @@ class CreateLesson extends Component {
 
   render() {
     const { classes } = this.props; 
+    let topSubmitButton; 
+    if (this.props.reduxState.question.currentLessonQuestions.length >= 3) { 
+      topSubmitButton = 
+      <Grid style={{textAlign: 'right', marginRight: '5%'}}>
+        <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
+      </Grid>
+    }
     return (
       // <Grid style={{textAlign: 'center', padding:'0%', margin: '0%'}} spacing={0} >
       <>
-        <Typography variant="h4">Add Questions</Typography> 
-        <Grid style={{textAlign: 'center'}} >
+        <Box component="div" style={{marginLeft: '5%'}}>
+          <Typography variant="h4">Add Questions</Typography> 
+        </Box>
+        <Grid style={{textAlign: 'center', marginTop: '6%'}} >
           <Box component="span">
             <TextField
               style={{width: '72%', marginBottom: '5%'}}
@@ -85,6 +94,7 @@ class CreateLesson extends Component {
           </Box>
           <Box component="span" style={{marginLeft: '5%'}}>
             <Button variant="contained" className="add-btn" onClick={this.addQuestion}>Add question</Button>
+            {topSubmitButton}
           </Box>
         </Grid>
           {

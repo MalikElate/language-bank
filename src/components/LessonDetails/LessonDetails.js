@@ -16,7 +16,7 @@ class LessonDetails extends Component {
   render() {
     return (
       <div>
-        <h2>{this.state.heading} {this.props.lesson.id}</h2> 
+        <h2>{this.state.heading}{this.props.match.params.lessonId}</h2> 
       </div>
     );
   }

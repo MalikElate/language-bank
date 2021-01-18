@@ -40,6 +40,7 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/user" to="/dashboard" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
@@ -58,6 +59,7 @@ class App extends Component {
               exact
               path="/user"
               component={UserPage}
+              // authRedirect="/dashboard"
             />
             <Route
               // with authRedirect:
