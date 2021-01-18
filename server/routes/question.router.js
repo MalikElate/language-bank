@@ -39,10 +39,20 @@ router.post('/:lessonId', (req, res) => {
 router.delete('/:questionId', (req, res) => {
   console.log('DELETING question with id:', req.params.questionId); 
   let questionId = req.params.questionId; 
-  let queryText = `DELETE FROM "question" WHERE question.id = $1;`; 
-  pool.query(queryText, [questionId])
+  let questionQueryText = `DELETE FROM "question" WHERE question.id = $1;`; 
+  let answerQueryText =  `DELETE FROM "answer" WHERE answer.question_id = $1;`; 
+  // answer query deletes all answers for a question
+  pool.query(answerQueryText, [questionId])
   .then( (result) => {
-      res.sendStatus(204); 
+    // question query deletes the answer itself
+    pool.query(questionQueryText, [questionId])
+    .then( (result) => {
+        res.sendStatus(204); 
+    })
+    .catch( (error) => {
+        console.log(`Error on query ${error}`);
+        res.sendStatus(500);
+    }); 
   })
   .catch( (error) => {
       console.log(`Error on query ${error}`);
