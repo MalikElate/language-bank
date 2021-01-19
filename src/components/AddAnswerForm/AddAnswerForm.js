@@ -84,17 +84,15 @@ class CreateLesson extends Component {
         }
       })
     }
-
-    // this.props.dispatch({type: 'TOGGLE_CORRECT_ANSWER', payload: {
-    //   answerId: this.props.answer.id, lessonId: this.props.reduxState.question.currentLessonQuestions[0].lesson_id, correct: false
-    // }})
   } 
 
+  
   render() {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     const { classes } = this.props; 
     let answer; 
     let answerSaveOrDeleteButton; 
-    let CheckBox = <Checkbox checked={this.state.answerEdit.correct} onChange={this.toggleCorrectStatus}/>
+    const CheckBox = <Checkbox checked={this.state.answerEdit.correct} onChange={this.toggleCorrectStatus}/>
     if (this.state.mode === 'display') { 
       answerSaveOrDeleteButton = <Button variant="contained" onClick={this.toggleEditMode} style={{marginLeft: '10px'}}>edit</Button>
     } else if (this.state.mode === 'edit') { 
@@ -103,12 +101,12 @@ class CreateLesson extends Component {
     if (this.state.mode === 'display') { 
       answer = <>
           <Typography className={classes.grow} variant="body1">
-            {this.props.reduxState.answer.orderAnswers[this.props.order]}) {this.props.answer.answer}
+            {alphabet[this.props.order]}) {this.props.answer.answer}
           </Typography>
           {CheckBox}
         </>
     } else if (this.state.mode === 'edit') { 
-          answer = <><TextField className={classes.grow} onChange={this.handleChangeForQuestion} value={this.state.answerEdit.answer}/>{CheckBox}</>
+        answer = <><TextField className={classes.grow} onChange={this.handleChangeForQuestion} value={this.state.answerEdit.answer}/>{CheckBox}</>
     }
     return (
         <Grid  

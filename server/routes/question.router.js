@@ -4,9 +4,8 @@ const router = express.Router();
 
 // GET questions from the db
 router.get('/:lessonId', (req, res) => {
-  console.log('getting questions for lesson with id:', req.params.lessonId); 
-  let lessonId = req.params.lessonId; 
-  let queryText = `SELECT question.question, question.id, question.lesson_id FROM "lesson" 
+  const lessonId = req.params.lessonId; 
+  const queryText = `SELECT question.question, question.id, question.lesson_id FROM "lesson" 
   JOIN "question" ON question.lesson_id = lesson.id
   WHERE lesson.id = $1 ORDER BY question.id DESC;`; 
   pool.query(queryText, [lessonId])
@@ -21,9 +20,8 @@ router.get('/:lessonId', (req, res) => {
 
 // POST questions tot the db
 router.post('/:lessonId', (req, res) => {
-  console.log(`POSTING question ${req.body.question} for lesson with id:, ${req.params.lessonId}`); 
-  let lessonId = req.params.lessonId; 
-  let queryText = `INSERT INTO "question" ( "question", "lesson_id") 
+  const lessonId = req.params.lessonId; 
+  const queryText = `INSERT INTO "question" ( "question", "lesson_id") 
   VALUES ($1, $2);`; 
   pool.query(queryText, [req.body.question, lessonId])
   .then( (result) => {
@@ -37,10 +35,9 @@ router.post('/:lessonId', (req, res) => {
 
 // DELETE questions from the db
 router.delete('/:questionId', (req, res) => {
-  console.log('DELETING question with id:', req.params.questionId); 
-  let questionId = req.params.questionId; 
-  let questionQueryText = `DELETE FROM "question" WHERE question.id = $1;`; 
-  let answerQueryText =  `DELETE FROM "answer" WHERE answer.question_id = $1;`; 
+  const questionId = req.params.questionId; 
+  const questionQueryText = `DELETE FROM "question" WHERE question.id = $1;`; 
+  const answerQueryText =  `DELETE FROM "answer" WHERE answer.question_id = $1;`; 
   // answer query deletes all answers for a question
   pool.query(answerQueryText, [questionId])
   .then( (result) => {
@@ -62,10 +59,9 @@ router.delete('/:questionId', (req, res) => {
 
 // UPDATE questions already in the db
 router.put('/:questionId', (req, res) => {
-  console.log('UPDATING question with id:', req.body.questionId); 
-  let questionId = req.body.questionId; 
-  let question = req.body.question; 
-  let queryText = `UPDATE "question" SET "question" = $1 
+  const questionId = req.body.questionId; 
+  const question = req.body.question; 
+  const queryText = `UPDATE "question" SET "question" = $1 
   WHERE question.id = $2;`; 
   pool.query(queryText, [question, questionId])
   .then( (result) => {

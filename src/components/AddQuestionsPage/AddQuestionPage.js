@@ -29,8 +29,6 @@ const styles = {
 
 class CreateLesson extends Component {
   componentDidMount() { 
-    // this.props.dispatch({type: "GET_ALL_LESSONS"}); 
-    console.log('----------------------------------------------COMPONENT QUESTION  MOUNTED ------------------------------------------------------')
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id});
     this.props.dispatch({type: 'GET_ANSWER', payload: this.props.match.params.id});
   } 

@@ -19,7 +19,8 @@ import {
 
 const styles = { 
   submitButton: { 
-    textAlign: "right"
+    textAlign: "right", 
+    marginRight: '5%'
   }
 }
 
@@ -55,7 +56,7 @@ class CreateLesson extends Component {
   }
   submit = () => { 
     this.props.history.push(
-      `/addquestions/${this.props.reduxState.lesson.allUserLessons[this.props.reduxState.lesson.allUserLessons.length - 1 ]?.id}`
+      `/add-questions/${this.props.reduxState.lesson.allUserLessons[this.props.reduxState.lesson.allUserLessons.length - 1 ]?.id}`
       )
   }
   create = () => { 
@@ -68,7 +69,6 @@ class CreateLesson extends Component {
       })
     }
   }
-
   str2bool = (value) => {
     if (value && typeof value === "string") {
          if (value.toLowerCase() === "true") return true;
@@ -77,7 +77,6 @@ class CreateLesson extends Component {
     return value;
   }
   render() {
-    console.log(this.state.newLesson.public)
     const { classes } = this.props; 
     let submitButton = <Button style={{marginRight: "1000"}} variant="contained" onClick={this.submit}>Next</Button>
     let createButton = <Button style={{marginRight: "1000"}} variant="contained" onClick={this.create}>Create</Button>
@@ -89,7 +88,9 @@ class CreateLesson extends Component {
     } 
     return (
       <Grid> 
-        <Typography variant="h4" color="primary">Create a lesson </Typography> 
+        <Grid style={{textAlign: 'left', display: 'inline-block', marginLeft: '5%', marginBottom: '4%' }}>
+          <Typography variant="h4" color="primary">Create a lesson </Typography> 
+        </Grid> 
         <Grid  
           container
           direction="column"
@@ -104,14 +105,15 @@ class CreateLesson extends Component {
           onChange={(event)=> this.handleChangeFor(event, 'description')} value={this.state.newLesson.description}/>
           <TextField label="Notes Link" variant="outlined" style={{display: "block", margin: "10px"}} 
           onChange={(event)=> this.handleChangeFor(event, 'notes')} value={this.state.newLesson.notes}/>
-          <FormControl component="fieldset">
+          <FormControl component="fieldset" style={{display: "block", margin: "15px"}}>
             <FormLabel component="legend">Do you want you lesson to be public?</FormLabel>
-            <RadioGroup row >
+            <RadioGroup row>
                 <FormControlLabel 
                 value={true}  
                 onChange={(event)=>this.handleChangeFor(event, "public")} 
                 control={<Radio />} label="Public" 
                 checked={this.state.newLesson.public}
+                style={{marginLeft: '35px'}}
                 />
                 <FormControlLabel 
                 value={false} 

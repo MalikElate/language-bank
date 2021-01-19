@@ -84,6 +84,7 @@ class CreateLesson extends Component {
     this.setState({ 
         answer: ''
     })
+    console.log('this.props.question.lesson_id------------------------------------------', this.props.question.lesson_id)
   } 
 
   render() {

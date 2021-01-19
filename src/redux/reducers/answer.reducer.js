@@ -9,17 +9,6 @@ switch (action.type) {
   }
 };
 
-
-const orderAnswers = (state = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", action) => {
-  switch (action.type) {
-      case 'ORDER_ANSWER':
-        return state;
-      default:
-        return state;
-  }
-  };
-
 export default combineReducers({
   currentLessonAnswers, 
-  orderAnswers
 });

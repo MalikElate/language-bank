@@ -32,7 +32,6 @@ const styles = {
 class Dashboard extends Component {
 
   componentDidMount() { 
-    console.log('-----------------------dashboard mounted----------------------'); 
     this.props.dispatch({type: "GET_ALL_LESSONS"}); 
   }
 

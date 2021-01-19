@@ -12,7 +12,7 @@ const theme = createMuiTheme({
         }
     }, 
     typography: {
-        fontFamily: 'Helvetica, sans-serif',
+        fontFamily: ['Nunito', 'sans-serif'].join(',')
     }
 }) 
 

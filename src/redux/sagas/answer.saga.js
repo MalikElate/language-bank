@@ -14,7 +14,11 @@ function* getAnswer(action) {
 // POST a answer to the db
 function* addAnswer(action) {
     try { 
-      yield axios.post('/api/answer', {questionId: action.payload.questionId, answer: action.payload.answer});
+      yield axios.post('/api/answer', {
+        questionId: action.payload.questionId, 
+        answer: action.payload.answer, 
+        lessonId: action.payload.lessonId
+      }); 
       yield put({type: 'GET_ANSWER', payload: action.payload.lessonId});
     } catch (error) {
       console.log('Error with new lesson POST:', error);
@@ -23,7 +27,6 @@ function* addAnswer(action) {
 // DELETE an answer from db 
 function* deleteAnswer(action) {
   try { 
-    console.log('--------DELETING answer----------------', action.payload); 
     yield axios.delete(`/api/answer/${action.payload.answerId}`);
     yield put({type: 'GET_ANSWER', payload: action.payload.lessonId});
   } catch (error) {
@@ -34,7 +37,6 @@ function* deleteAnswer(action) {
 // EDIT an answer in the db
 function* editAnswer(action) {
   try { 
-    console.log('--------EDITING answer----------------', action.payload.answerId); 
     yield axios.put(`/api/answer/${action.payload.answerId}`, action.payload);
     yield put({type: 'GET_ANSWER', payload: action.payload.lessonId});
   } catch (error) {

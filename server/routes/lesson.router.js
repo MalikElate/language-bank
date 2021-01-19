@@ -43,4 +43,35 @@ router.post('/', (req, res) => {
   }); 
 
 
+  router.delete('/:lessonId', (req, res) => {
+    console.log('DELETING lesson with id:', req.params.lessonId); 
+    const lessonId = req.params.lessonId; 
+    const answerQueryText =  `DELETE FROM "answer" WHERE answer.lesson_id = $1;`; 
+    const questionQueryText = `DELETE FROM "question" WHERE question.lesson_id = $1;`; 
+    const lessonQueryText = `DELETE FROM "lesson" WHERE lesson.id = $1;`; 
+    // answer query deletes all answers for a question
+    pool.query(answerQueryText, [lessonId])
+    .then( (result) => {
+      pool.query(questionQueryText, [lessonId])
+      .then( (result) => {
+        pool.query(lessonQueryText, [lessonId])
+          .then( (result) => {
+            res.sendStatus(200);
+          })
+          .catch( (error) => {
+            console.log(`Error on query ${error}`);
+            res.sendStatus(500);
+          });
+      })
+      .catch( (error) => {
+          console.log(`Error on query ${error}`);
+          res.sendStatus(500);
+      });
+    })
+    .catch( (error) => {
+        console.log(`Error on query ${error}`);
+        res.sendStatus(500);
+    });
+  });
+
 module.exports = router;

@@ -4,7 +4,6 @@ import axios from 'axios';
 // Get all the added lessons for logged in user from the database
 function* getQuestions(action){ 
   try {
-      console.log(`Getting all questions for lesson ${action.payload} from db`); 
       const response = yield axios.get(`/api/question/${action.payload}`);
       yield put({type: 'SET_QUESTION', payload: response.data}); 
   }
@@ -15,7 +14,6 @@ function* getQuestions(action){
 
 function* addQuestion(action){ 
   try {
-      console.log(`Posting a new question for lesson ${action.payload}`); 
       const response = yield axios.post(`/api/question/${action.payload.lessonId}`, action.payload);
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
@@ -26,7 +24,6 @@ function* addQuestion(action){
 
 function* deleteQuestion(action){ 
   try {
-      console.log(`DELETING a new question for lesson ${action.payload.questionId}`); 
       const response = yield axios.delete(`/api/question/${action.payload.questionId}`);
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
@@ -37,9 +34,7 @@ function* deleteQuestion(action){
 
 function* editQuestion(action){ 
   try {
-      console.log(`EDITING a question for lesson ${action.payload.questionId}`); 
       const response = yield axios.put(`/api/question/${action.payload.questionId}`, action.payload);
-      console.log(response)
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
