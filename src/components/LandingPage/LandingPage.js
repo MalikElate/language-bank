@@ -29,7 +29,7 @@ class LandingPage extends Component {
           <Grid
           item lg={12} sm={12} xs={12}
           style={{ padding: 20}}>
-            <Typography variant="h1">Topo</Typography> 
+            <Typography variant="h1" color="primary">Topo</Typography> 
           </Grid>
           <Grid
           className={classes.buttonGrid}

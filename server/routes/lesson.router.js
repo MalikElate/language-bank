@@ -7,9 +7,9 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   // Add query to get all lessons for a specific user
-  let userId = req.user.id; 
+  const userId = req.user.id; 
   console.log('Getting lessons for user with id:', req.user.id); 
-  let queryText = 'SELECT * from "lesson" WHERE lesson_owner_id = $1;'; 
+  const queryText = 'SELECT * from "lesson" WHERE lesson_owner_id = $1;'; 
   pool.query(queryText, [userId])
   .then( (result) => {
       res.send(result.rows);
@@ -29,10 +29,11 @@ router.post('/', (req, res) => {
     const notes = req.body.notes; 
     const name = req.body.lessonName; 
     const language = req.body.language; 
+    const public = req.body.public; 
     const lesson_owner_id = req.body.lesson_owner_id; 
-    const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "lesson_owner_id") 
-    VALUES ($1, $2, $3, $4, $5);`;
-    pool.query(queryText, [description, notes, name, language, lesson_owner_id])
+    const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "public", "lesson_owner_id") 
+    VALUES ($1, $2, $3, $4, $5, $6);`;
+    pool.query(queryText, [description, notes, name, language, public, lesson_owner_id])
       .then(() => res.sendStatus(201))
       .catch( (error) => {
         console.log(`Error on post lesson query ${error}`);

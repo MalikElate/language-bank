@@ -28,8 +28,9 @@ class CreateLesson extends Component {
     answerEdit: { 
       answer: this.props.answer.answer, 
       answerId: this.props.answer.id, 
-      lessonId: this.props.reduxState.question.currentLessonQuestions[0].lesson_id
-    }
+      lessonId: this.props.reduxState.question.currentLessonQuestions[0].lesson_id, 
+      correct: this.props.answer.correct
+    },
   }
   deleteAnswer = () => {  
     this.props.dispatch({type: 'DELETE_ANSWER', payload:{ 
@@ -64,22 +65,52 @@ class CreateLesson extends Component {
     console.log("saving question")
   }
 
+  toggleCorrectStatus = () => { 
+    console.log('toggleCorrectStatus'); 
+    if (this.state.answerEdit.correct === true) { 
+      this.setState({ 
+        mode: 'edit',
+        answerEdit: { 
+          ...this.state.answerEdit,
+          correct: false 
+        }
+      })
+    } else if (this.state.answerEdit.correct === false) { 
+      this.setState({ 
+        mode: 'edit',
+        answerEdit: { 
+          ...this.state.answerEdit,
+          correct: true
+        }
+      })
+    }
+
+    // this.props.dispatch({type: 'TOGGLE_CORRECT_ANSWER', payload: {
+    //   answerId: this.props.answer.id, lessonId: this.props.reduxState.question.currentLessonQuestions[0].lesson_id, correct: false
+    // }})
+  } 
+
   render() {
     const { classes } = this.props; 
     let answer; 
     let answerSaveOrDeleteButton; 
+    let CheckBox = <Checkbox checked={this.state.answerEdit.correct} onChange={this.toggleCorrectStatus}/>
     if (this.state.mode === 'display') { 
       answerSaveOrDeleteButton = <Button variant="contained" onClick={this.toggleEditMode} style={{marginLeft: '10px'}}>edit</Button>
     } else if (this.state.mode === 'edit') { 
       answerSaveOrDeleteButton = <Button variant="contained" style={{marginLeft:'10px'}} onClick={() => {this.toggleEditMode(); this.save()}}>Save</Button> 
     }
     if (this.state.mode === 'display') { 
-      answer = <Typography className={classes.grow} variant="body1">{this.props.reduxState.answer.orderAnswers[this.props.order]}) {this.props.answer.answer}</Typography>
+      answer = <>
+          <Typography className={classes.grow} variant="body1">
+            {this.props.reduxState.answer.orderAnswers[this.props.order]}) {this.props.answer.answer}
+          </Typography>
+          {CheckBox}
+        </>
     } else if (this.state.mode === 'edit') { 
-          answer = <><TextField className={classes.grow} onChange={this.handleChangeForQuestion} value={this.state.answerEdit.answer}/><Checkbox/></>
+          answer = <><TextField className={classes.grow} onChange={this.handleChangeForQuestion} value={this.state.answerEdit.answer}/>{CheckBox}</>
     }
     return (
-    
         <Grid  
           container
           direction="row"
@@ -88,7 +119,8 @@ class CreateLesson extends Component {
         > 
           {answer}
           <Button variant="contained" onClick={this.deleteAnswer}>delete</Button>
-          {answerSaveOrDeleteButton}
+          {answerSaveOrDeleteButton} 
+          
         </Grid>  
     );
   }

@@ -5,15 +5,14 @@ import { deepPurple, amber } from '@material-ui/core/colors';
 const theme = createMuiTheme({ 
     palette: { 
         primary: { 
-            main: deepPurple[500]
+            main: '#283f3b'
         }, 
         secondary: { 
-            main: amber[500], 
-            contrastText: deepPurple[900]
+            main: '#95BF74'
         }
     }, 
-    pageHeader: { 
-        
+    typography: {
+        fontFamily: 'Helvetica, sans-serif',
     }
 }) 
 

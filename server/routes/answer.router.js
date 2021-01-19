@@ -57,10 +57,12 @@ router.delete('/:answerId', (req, res) => {
 // UPDATE answer already in the db
 router.put('/:answerId', (req, res) => {
   console.log('UPDATING answer with id:', req.body.questionId); 
+  console.log('UPDATING answer with id:', req.body); 
   let answerId = req.body.answerId; 
   let answer = req.body.answer; 
-  let queryText = `UPDATE "answer" SET "answer" = $1 WHERE answer.id = $2;`; 
-  pool.query(queryText, [answer, answerId])
+  let correct = req.body.correct; 
+  let queryText = `UPDATE "answer" SET "answer" = $1, "correct" = $2 WHERE answer.id = $3;`; 
+  pool.query(queryText, [answer, correct, answerId])
   .then( (result) => {
       res.sendStatus(200); 
   })

@@ -7,7 +7,8 @@ import {
   TextField, 
   Typography,
   Button, 
-  Box
+  Box, 
+  Checkbox
  } from '@material-ui/core';
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -83,7 +84,7 @@ class CreateLesson extends Component {
     this.setState({ 
         answer: ''
     })
-  }
+  } 
 
   render() {
     const { classes } = this.props; 
@@ -124,7 +125,8 @@ class CreateLesson extends Component {
               value={this.state.answer}
             />
           </Box>
-          <Box component="span" style={{marginLeft: '5%'}}>
+          <Box component="span" style={{marginLeft: '2%'}}>
+            <Checkbox color="secondary"/>
             <Button variant="contained" style={{margin:'10px'}} onClick={this.addAnswer}>Add answer</Button> 
           </Box>
         </Grid> 

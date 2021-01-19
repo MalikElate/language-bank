@@ -17,6 +17,15 @@ import {
 const styles = { 
   grow: { 
     flexGrow: 1
+  }, 
+  headerCell: { 
+    backgroundColor: "#95bf74",
+    color: 'white'
+  }, 
+  tableRow: {
+    "&:hover": {
+      backgroundColor: "blue !important"
+    }
   }
 }
 
@@ -42,7 +51,7 @@ class Dashboard extends Component {
           >
             <Grid style={{textAlign: 'left', display: 'inline-block', marginRight: '60%'}}>
             {/* ------------------------------- Gid containing delete, and edit or delete buttons----------------- */}
-            <Typography variant="h3">Lessons</Typography> 
+              <Typography variant="h4" color="primary" >Lessons</Typography> 
             </Grid> 
             <Button variant="contained" className={classes.grow} onClick={() => {  
               this.props.history.push('/create-lesson');
@@ -54,11 +63,11 @@ class Dashboard extends Component {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Lesson Name</TableCell>
-                  <TableCell>Language</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Lesson Code</TableCell>
-                  <TableCell>&nbsp;</TableCell>
+                  <TableCell className={classes.headerCell}>Lesson name</TableCell>
+                  <TableCell className={classes.headerCell}>Language</TableCell>
+                  <TableCell className={classes.headerCell}>Description</TableCell>
+                  <TableCell className={classes.headerCell}>Lesson code</TableCell>
+                  <TableCell className={classes.headerCell}>Details page</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
