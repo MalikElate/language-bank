@@ -23,9 +23,7 @@ function* getAllLessons(){
 }
 function* deleteLesson(action){ 
   try {
-      const response = yield axios.delete(`/api/lesson/${action.payload.lessonId}`);
-      console.log(response.data)
-      // yield put({type: 'SET_ALL_LESSONS', payload: response.data}); 
+    yield axios.delete(`/api/lesson/${action.payload.lessonId}`);
   }
   catch (error) {
       console.log('error with test gif get request', error);

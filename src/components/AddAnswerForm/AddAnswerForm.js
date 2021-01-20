@@ -64,7 +64,6 @@ class CreateLesson extends Component {
     this.props.dispatch({type: 'EDIT_ANSWER', payload: this.state.answerEdit}); 
     console.log("saving question")
   }
-
   toggleCorrectStatus = () => { 
     console.log('toggleCorrectStatus'); 
     if (this.state.answerEdit.correct === true) { 
@@ -85,7 +84,6 @@ class CreateLesson extends Component {
       })
     }
   } 
-
   
   render() {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import LessonDetailsQuestion from '../LessonDetailsQuestion/LessonDetailsQuestion'; 
 import {
   Grid,
   withStyles,
   Typography, 
-  Button
+  Button, 
+  Box
  } from '@material-ui/core';
 
 const styles = { 
-
+  root: { 
+    flexGrow: 1
+  }
 }
 
 class LessonDetails extends Component {
@@ -18,6 +21,7 @@ class LessonDetails extends Component {
 
   componentDidMount() { 
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.lessonId});
+    this.props.dispatch({type: 'GET_ANSWER', payload: this.props.match.params.lessonId});
   }
 
   deleteLesson = () => { 
@@ -29,23 +33,38 @@ class LessonDetails extends Component {
     }
   }
   editLesson = () => { 
-    console.log('editing lesson')
+    this.props.history.push(`/add-questions/${this.props.match.params.lessonId}`); 
   }
   render() {
     const { classes } = this.props; 
+    let bottomButtons; 
+    if (this.props.reduxState.question.currentLessonQuestions > 7) { 
+      bottomButtons = <><Button variant="contained" onClick={this.editLesson}>Edit</Button>
+      <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete</Button></>
+    }
     return (
       <>
-        user id:
-        {JSON.stringify(this.props.reduxState.user.id)}
-        <Typography variant="h4">{}</Typography> 
-        <Grid  direction="row" container> 
-          <Grid item item lg={6} sm={6} xs={12}> 
-            <Button onClick={this.editLesson}>Edit</Button>
-            <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete</Button>
+        {/* <Typography variant="h4">{}</Typography>  */}
+        <Grid  direction="row" className={classes.root} container> 
+          <Grid item xs={5} style={{marginLeft: '4%'}}> 
+            <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}>
+              <Button variant="contained" style={{marginRight: '10px'}} onClick={this.editLesson}>Edit</Button>
+              <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete</Button>
+              <ol>
+              {
+                this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
+                <LessonDetailsQuestion key={i} question={question}/>
+                )
+              }
+              </ol>
+              {bottomButtons}
+            </Box>
           </Grid>
-          <Grid item item lg={6} sm={6} xs={12}> 
-            <Button onClick={this.editLesson}>Edit</Button>
-            <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete</Button>
+          <Grid item xs={5} > 
+          <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}>
+
+
+          </Box>
           </Grid>
         </Grid>
       </>
