@@ -4,7 +4,6 @@ import LessonDetailsQuestion from '../LessonDetailsQuestion/LessonDetailsQuestio
 import {
   Grid,
   withStyles,
-  Typography, 
   Button, 
   Box
  } from '@material-ui/core';
@@ -12,12 +11,13 @@ import {
 const styles = { 
   root: { 
     flexGrow: 1
+  }, 
+  itemGrid: { 
+    minHeight: "70vh"
   }
 }
 
 class LessonDetails extends Component {
-  state = {
-  };
 
   componentDidMount() { 
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.lessonId});
@@ -46,14 +46,14 @@ class LessonDetails extends Component {
       <>
         {/* <Typography variant="h4">{}</Typography>  */}
         <Grid  direction="row" className={classes.root} container> 
-          <Grid item xs={5} style={{marginLeft: '4%'}}> 
-            <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}>
+          <Grid item xs={5} style={{marginLeft: '4%'}} > 
+            <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
               <Button variant="contained" style={{marginRight: '10px'}} onClick={this.editLesson}>Edit</Button>
               <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete</Button>
               <ol>
               {
                 this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
-                <LessonDetailsQuestion key={i} question={question}/>
+                  <LessonDetailsQuestion key={i} question={question}/>
                 )
               }
               </ol>
@@ -61,7 +61,7 @@ class LessonDetails extends Component {
             </Box>
           </Grid>
           <Grid item xs={5} > 
-          <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}>
+          <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
 
 
           </Box>

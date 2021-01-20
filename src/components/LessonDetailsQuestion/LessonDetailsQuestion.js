@@ -5,7 +5,6 @@ import {
   Grid,
   withStyles,
   Typography, 
-  Button
  } from '@material-ui/core';
 
 const styles = { 
@@ -13,9 +12,6 @@ const styles = {
 }
 
 class LessonDetailsQuestion extends Component {
-  componentDidMount() { 
-    // this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.lessonId});
-  }
   render() {
     const { classes } = this.props; 
     return (

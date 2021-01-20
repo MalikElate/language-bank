@@ -22,6 +22,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import CreateLessonPage from '../CreateLessonPage/CreateLessonPage';
 import LessonDetails from '../LessonDetails/LessonDetails'; 
 import AddQuestion from '../AddQuestionsPage/AddQuestionPage'; 
+import TakeLessonHome from '../TakeLessonHome/TakeLessonHome'
 import './App.css';
 
 class App extends Component {
@@ -83,17 +84,6 @@ class App extends Component {
               component={LessonDetails}
             /> 
 
-            {/* { 
-              this.props.reduxState.lesson.allUserLessons.map((lesson, i) => 
-                <ProtectedRoute
-                key={i}
-                exact
-                path={`/lesson/details/${lesson.id}`}
-                component={()=><LessonDetails lesson={lesson}/>}
-              />
-              )
-            } */}
-
             <ProtectedRoute
               exact
               path="/create-lesson"
@@ -103,9 +93,15 @@ class App extends Component {
           
             <ProtectedRoute
               exact
-              path={`/add-questions/:id`}
+              path='/add-questions/:id'
               component={AddQuestion}
             />           
+
+            <Route
+            exact 
+            path="/take-lesson"
+            component={TakeLessonHome}
+            />
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
