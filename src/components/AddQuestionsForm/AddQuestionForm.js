@@ -27,8 +27,11 @@ const styles = {
 class CreateLesson extends Component {
 
   state = {  
+    mode: 'display', 
+    newAnswer: { 
       answer: '', 
-      mode: 'display', 
+      correct: false
+    },
       questionEdit: { 
         question: '', 
         lessonId: this.props.question.lesson_id, 
@@ -43,11 +46,23 @@ class CreateLesson extends Component {
         questionId: this.props.question.id, lessonId: this.props.question.lesson_id 
       }}); 
   }
-
-  handleChangeForAnswer = (event) => { 
-    this.setState({ 
-        answer: event.target.value
-    })
+  handleChangeForAnswer = (event, inputType) => { 
+    if (inputType === "answer") { 
+      this.setState({ 
+        newAnswer: { 
+          ...this.state.newAnswer,
+          [inputType]: event.target.value
+        }
+      })
+    } else if (inputType === "correct") { 
+      console.log('change is happeinging dasfasdfasf')
+      this.setState({ 
+        newAnswer: { 
+          ...this.state.newAnswer,
+          [inputType]: !this.state.newAnswer.correct
+        }
+      })
+    }
   } 
   handleChangeForQuestion = (event) => { 
     this.setState({ 
@@ -72,17 +87,21 @@ class CreateLesson extends Component {
       })
     }
   } 
-
   save = () => { 
     this.props.dispatch({type: 'EDIT_QUESTION', payload: this.state.questionEdit}); 
   }
-
   addAnswer = () => { 
     this.props.dispatch({type: 'ADD_ANSWER', payload:{ 
-      questionId: this.props.question.id, lessonId: this.props.question.lesson_id, answer: this.state.answer 
+      questionId: this.props.question.id, 
+      lessonId: this.props.question.lesson_id,
+      answer: this.state.newAnswer.answer, 
+      correct: this.state.newAnswer.correct 
     }});
     this.setState({ 
-        answer: ''
+      newAnswer: { 
+        answer: '', 
+        correct: false
+      }
     })
   } 
 
@@ -102,6 +121,7 @@ class CreateLesson extends Component {
     } else if (this.state.mode === 'edit') { 
       question = <TextField className={classes.grow} onChange={this.handleChangeForQuestion} value={this.state.questionEdit.question}/>
     }
+
     return (
       <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block", backgroundColor: 'white'}}> 
         <Grid  
@@ -121,12 +141,12 @@ class CreateLesson extends Component {
           <Box component="span">
             <TextField
               style={{width: '45%', marginBottom: '5%'}}
-              onChange={this.handleChangeForAnswer}
-              value={this.state.answer}
+              onChange={(event)=>this.handleChangeForAnswer(event, "answer")}
+              value={this.state.newAnswer.answer}
             />
           </Box>
           <Box component="span" style={{marginLeft: '2%'}}>
-            <Checkbox color="secondary"/>
+            <Checkbox color="secondary" checked={this.state.newAnswer.correct} onChange={(event)=>this.handleChangeForAnswer(event, "correct")}/>
             <Button variant="contained" style={{margin:'10px'}} onClick={this.addAnswer}>Add answer</Button> 
           </Box>
         </Grid> 

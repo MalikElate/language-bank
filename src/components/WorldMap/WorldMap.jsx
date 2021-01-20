@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { WorldMap } from "react-svg-worldmap";
+
 import {
   Grid,
   withStyles,

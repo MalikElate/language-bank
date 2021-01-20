@@ -24,10 +24,11 @@ router.post('/', (req, res) => {
   let questionId = req.body.questionId;
   let answer = req.body.answer;
   let lessonId = req.body.lessonId;
-  let queryText = `INSERT INTO "answer" ( "answer", "question_id", "lesson_id") 
-  VALUES ($1, $2, $3);`; 
-  console.log('questionId', req.body.questionId, 'answer', req.body.answer, 'lessonId', req.body.lessonId); 
-  pool.query(queryText, [answer, questionId, lessonId])
+  let correct = req.body.correct;
+  let queryText = `INSERT INTO "answer" ( "answer", "question_id", "correct", "lesson_id") 
+  VALUES ($1, $2, $3, $4);`; 
+  console.log('questionId', req.body.questionId, 'answer', req.body.answer, 'lessonId', req.body.lessonId, 'correct', req.body.correct); 
+  pool.query(queryText, [answer, questionId, correct, lessonId])
   .then( (result) => {
       res.sendStatus(201); 
   })

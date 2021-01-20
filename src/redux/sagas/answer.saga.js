@@ -17,7 +17,8 @@ function* addAnswer(action) {
       yield axios.post('/api/answer', {
         questionId: action.payload.questionId, 
         answer: action.payload.answer, 
-        lessonId: action.payload.lessonId
+        lessonId: action.payload.lessonId, 
+        correct: action.payload.correct
       }); 
       yield put({type: 'GET_ANSWER', payload: action.payload.lessonId});
     } catch (error) {
