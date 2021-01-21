@@ -23,6 +23,8 @@ import CreateLessonPage from '../CreateLessonPage/CreateLessonPage';
 import LessonDetails from '../LessonDetails/LessonDetails'; 
 import AddQuestion from '../AddQuestionsPage/AddQuestionPage'; 
 import TakeLessonHome from '../TakeLessonHome/TakeLessonHome'
+import TakeLessonForm from '../TakeLessonForm/TakeLessonForm'; 
+import TakeLessonFormQuestion from '../TakeLessonQuestion/TakeLessonQuestion'; 
 import './App.css';
 
 class App extends Component {
@@ -102,6 +104,18 @@ class App extends Component {
             path="/take-lesson"
             component={TakeLessonHome}
             />
+
+            <Route
+            exact 
+            path="/take-lesson/form/:lessonId"
+            component={TakeLessonForm}
+            />
+
+            <Route
+            exact 
+            path="/take-lesson/question/:lessonId/:questionId"
+            component={TakeLessonFormQuestion}
+            />    
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will

@@ -18,6 +18,24 @@ router.get('/:lessonId', (req, res) => {
   }); 
 }); 
 
+// GET one questions from the db for the take lesson question page
+router.get('/take-lesson/:lessonId', (req, res) => {
+  // const lessonId = req.params.lessonId; 
+  // const queryText = `SELECT question.question, question.id, question.lesson_id FROM "lesson" 
+  // JOIN "question" ON question.lesson_id = lesson.id
+  // WHERE lesson.id = $1 ORDER BY question.id DESC;`; 
+  // pool.query(queryText, [lessonId])
+  // .then( (result) => {
+  //   res.send(result.rows);
+  // })
+  // .catch( (error) => {
+  //   console.log(`Error on query ${error}`);
+  //   res.sendStatus(500);
+  // }); 
+  res.sendStatus(200);
+}); 
+
+
 // POST questions tot the db
 router.post('/:lessonId', (req, res) => {
   const lessonId = req.params.lessonId; 

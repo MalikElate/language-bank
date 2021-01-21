@@ -19,9 +19,6 @@ const styles = {
     textAlign: "right", 
     marginRight: "5%"
   }, 
-  addButton: { 
-    marginRight: "5%"
-  }, 
   root: { 
     flexGrow: 1
   }, 
@@ -30,7 +27,11 @@ const styles = {
   }, 
   itemBox: { 
     minHeight: '75vh'
-  }
+  },
+  headerCell: { 
+    backgroundColor: "#95bf74",
+    color: 'white'
+  }, 
 }
 
 class CreateLesson extends Component {
@@ -39,46 +40,43 @@ class CreateLesson extends Component {
     this.props.dispatch({type: 'GET_ALL_PUBLIC_LESSONS'})
   }
 
-  state = {
-    }
-
   render() {
     const { classes } = this.props; 
     return (
       <>
-      {JSON.stringify(this.props.reduxState.lesson.allPublicLessons)}
        <Grid  direction="row" className={classes.root} container> 
-          <Grid item xs={7} style={{marginLeft: '3%', marginRight: '10px'}} > 
+          <Grid item sm={7} xs={12} style={{marginLeft: '3%', marginRight: '10px'}} > 
             <Box boxShadow={2} style={{display: "block"}} className={classes.itemBox} style={{padding: '10px'}}>
               <Typography color="primary" variant="h4" className={classes.boxHeader}>Public lessons</Typography> 
               <Table>
                 <TableHead> 
                   <TableRow> 
-                    <TableCell>Lesson name</TableCell>
-                    <TableCell>Language</TableCell>
-                    <TableCell>Country of origin</TableCell>
-                    <TableCell>Experience</TableCell>
-                    <TableCell>&nbsp;</TableCell>
+                    <TableCell className={classes.headerCell}>Lesson name</TableCell>
+                    <TableCell className={classes.headerCell}>Language</TableCell>
+                    <TableCell className={classes.headerCell}>Country of origin</TableCell>
+                    <TableCell className={classes.headerCell}>Experience</TableCell>
+                    <TableCell className={classes.headerCell}>&nbsp;</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   { 
-                    this.props.reduxState.lesson.allPublicLessons.map(lesson => (
-                      <TableRow>
+                    this.props.reduxState.lesson.allPublicLessons.map((lesson, i) => (
+                      <TableRow key={i}>
                         <TableCell>{lesson.name}</TableCell>
                         <TableCell>{lesson.language}</TableCell>
                         <TableCell>{lesson.country}</TableCell>
                         <TableCell>{lesson.difficulty}</TableCell>
-                        <TableCell><Button >Start</Button></TableCell>
+                        <TableCell><Button variant="contained" onClick={ () => {
+                          this.props.history.push(`/take-lesson/form/${lesson.id}`)
+                        }}>Start</Button></TableCell>
                       </TableRow>
                     ))
                   }    
                 </TableBody>
-                
               </Table>
             </Box>
           </Grid>
-          <Grid item xs={4} > 
+          <Grid item sm={4} xs={12} > 
             <Box boxShadow={2} style={{display: "block", padding: '10px'}} className={classes.itemBox}>
               <Typography color="primary" variant="h4" className={classes.boxHeader}>Private lessons</Typography>
               <Typography color="primary" variant="body1" className={classes.boxHeader}>
