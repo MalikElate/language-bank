@@ -2,10 +2,21 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
 router.get('/', (req, res) => {
+  // Add query to get all lessons for a specific user
+  const queryText = 'SELECT * from "lesson" WHERE public = true;'; 
+  pool.query(queryText)
+  .then( (result) => {
+      res.send(result.rows);
+  })
+  .catch( (error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+  });
+}); 
+
+// get an individual users lessons
+router.get('/user', (req, res) => {
   // Add query to get all lessons for a specific user
   const userId = req.user.id; 
   console.log('Getting lessons for user with id:', req.user.id); 
@@ -20,9 +31,7 @@ router.get('/', (req, res) => {
   });
 }); 
 
-/**
- * POST route template
- */
+// individual user can create a lesson
 router.post('/', (req, res) => {
   // POST route code here
     const description = req.body.description;
@@ -30,10 +39,12 @@ router.post('/', (req, res) => {
     const name = req.body.lessonName; 
     const language = req.body.language; 
     const public = req.body.public; 
+    const difficulty = req.body.difficulty; 
+    const country = req.body.country; 
     const lesson_owner_id = req.body.lesson_owner_id; 
-    const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "public", "lesson_owner_id") 
-    VALUES ($1, $2, $3, $4, $5, $6);`;
-    pool.query(queryText, [description, notes, name, language, public, lesson_owner_id])
+    const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "difficulty", "country", "public", "lesson_owner_id") 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+    pool.query(queryText, [description, notes, name, language, difficulty, country, public, lesson_owner_id])
       .then(() => res.sendStatus(201))
       .catch( (error) => {
         console.log(`Error on post lesson query ${error}`);
@@ -42,7 +53,7 @@ router.post('/', (req, res) => {
     });
   }); 
 
-
+  // delete a users lesson 
   router.delete('/:lessonId', (req, res) => {
     console.log('DELETING lesson with id:', req.params.lessonId); 
     const lessonId = req.params.lessonId; 

@@ -25,7 +25,6 @@ class LandingPage extends Component {
           justify="center"
           alignItems="center" 
           direction="column"
-          // style={{ backgroundImage: "url('./images/image100.png')", }}
           > 
           <Grid
           item lg={12}
