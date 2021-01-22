@@ -1,5 +1,4 @@
 import { createMuiTheme } from '@material-ui/core'; 
-import { deepPurple, amber } from '@material-ui/core/colors'; 
 
 
 const theme = createMuiTheme({ 
@@ -12,7 +11,7 @@ const theme = createMuiTheme({
         }
     }, 
     typography: {
-        fontFamily: ['Nunito', 'sans-serif'].join(',')
+        fontFamily: ['arial','Nunito', 'sans-serif'].join(',')
     }
 }) 
 

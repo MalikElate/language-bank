@@ -30,7 +30,7 @@ class TakeLessonForm extends Component {
     }
   }
 
-  componentDidMount() { 
+  componentDidMount() {    
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.lessonId});
   }
 
@@ -72,6 +72,7 @@ class TakeLessonForm extends Component {
               <Button  variant="contained" onClick={ () => {
                 this.props.dispatch({type: "ADD_STUDENT", payload: this.state.newStudent}); 
                 this.props.history.push(
+                  // path="/take-lesson/question/:lessonId/:questionId"
                   `/take-lesson/question/${this.state.newStudent.lessonId}/${this.props.reduxState.question.currentLessonQuestions[0]?.id}`
                   ); 
                 }}>Start</Button>
