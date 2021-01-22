@@ -5,7 +5,12 @@ import {
   withStyles,
   Button, 
   Box, 
-  Typography
+  Typography, 
+  FormControl, 
+  FormLabel, 
+  RadioGroup, 
+  FormControlLabel, 
+  Radio
  } from '@material-ui/core';
 
 const styles = { 
@@ -17,13 +22,14 @@ const styles = {
   root: { 
     marginRight: '80%',
   }, 
+  correct: false
 }
 
 class TakeLessonQuestion extends Component {
 
   state = { 
     mode: "question",
-    correct: false, 
+    correct: "false", 
     nextQuestionId: "something went wrong", 
     currentQuestionIndex: "something went wrong", 
     finalQuestionIndex:"something went wrong"
@@ -67,10 +73,17 @@ class TakeLessonQuestion extends Component {
         `/take-lesson/question/${this.props.match.params.lessonId}/${this.state.nextQuestionId}`
       );
     }
-}
+  }
+  handleChangeForAnswer = (event) => { 
+    this.setState({ 
+      "correct": event.target.value
+    })
+  } 
 
   render() {
     const { classes } = this.props; 
+    const mode = this.state.correct[0] === 'f'; 
+    console.log(mode)
     let boxContents; 
     if(this.state.mode === "question") { 
       boxContents = <>
@@ -83,18 +96,37 @@ class TakeLessonQuestion extends Component {
         </Typography>
       )
       }
-      {
-      this.props.reduxState.answer.currentLessonAnswers.filter((answer) => {  
-        return answer.question_id === Number(this.props.match.params.questionId)
-      }).map((answer, i) => 
-      <Typography variant="body1" key={i}>
-            {answer.answer}</Typography> 
-        )
-      } 
+      <FormControl>
+          <RadioGroup column>
+            {
+            this.props.reduxState.answer.currentLessonAnswers.filter((answer) => {  
+              return answer.question_id === Number(this.props.match.params.questionId)
+            }).map((answer, i) => 
+            <>
+              <FormControlLabel 
+              key={i}
+              value={answer.correct.toString() + i}  
+              onChange={(event)=>this.handleChangeForAnswer(event)} 
+              control={<Radio key={i}/>} label={answer.answer} 
+              />   
+            </>
+              )
+            }
+        </RadioGroup>
+      </FormControl>
       <Button variant="contained" onClick={this.submitAnswer}>Submit</Button>
       </>
     } else if (this.state.mode === "confirmation") { 
-        boxContents = <>
+        boxContents = <> 
+
+        {
+          mode ? 
+          <Typography variant="h6">That is incorrect, check the notes for more info</Typography>
+          : 
+          // correct answer
+          <Typography variant="h6">That is correct! </Typography>
+
+        }
         <Button variant="contained" onClick={this.nextQuestion}>Next</Button>
 
         </>

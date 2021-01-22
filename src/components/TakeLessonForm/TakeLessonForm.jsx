@@ -45,10 +45,10 @@ class TakeLessonForm extends Component {
 
   render() {
     const { classes } = this.props; 
+    console.log(this.state.newStudent)
     return (
       <>
         {/* <Typography variant="h4">{}</Typography>  */}
-        {JSON.stringify(this.props.reduxState)}
         <Grid style={{margin: "3%"}}>
           <Box boxShadow={2} style={{padding: "5%", display: "block"}}>
             <Grid  

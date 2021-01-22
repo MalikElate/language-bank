@@ -12,10 +12,11 @@ router.post('/', (req, res) => {
   const name = req.body.name;
   const className = req.body.class;
   const lessonId = req.body.lessonId;
+  const email = req.body.email;
   const queryText = `INSERT INTO "student" ( "name", "email", "class", "lesson_id") 
-  VALUES ('student name', 'example@example.com', 'class name', 2); `; 
-  console.log('IN STUDENT ROUTE name, answer, className, lessonId',name, className, lessonId); 
-  pool.query(queryText)
+  VALUES ( $1, $2, $3, $4); `; 
+  console.log('IN STUDENT ROUTE name, className, lessonId',name, className, email, lessonId); 
+  pool.query(queryText, [name, email, className, lessonId])
   .then( (result) => {
       res.sendStatus(201); 
   })

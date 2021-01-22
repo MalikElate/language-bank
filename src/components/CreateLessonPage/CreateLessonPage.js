@@ -432,4 +432,3 @@ const mapStateToProps = reduxState => ({
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(CreateLesson))
-

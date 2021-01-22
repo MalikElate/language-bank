@@ -84,7 +84,9 @@ class CreateLesson extends Component {
               </Typography> 
               <Grid style={{marginTop: '5%'}}> 
                 <TextField style={{marginLeft: '15px', marginRight: '15px'}}/>
-                <Button variant="contained">Start</Button>
+                <Button variant="contained" onClick={()=> { 
+                  console.log('deez nuts')
+                }}>Start</Button>
               </Grid>        
             </Box>
           </Grid>
