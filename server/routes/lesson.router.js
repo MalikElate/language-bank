@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
 router.get('/user', (req, res) => {
   // Add query to get all lessons for a specific user
   const userId = req.user.id; 
-  console.log('Getting lessons for user with id:', req.user.id); 
   const queryText = 'SELECT * from "lesson" WHERE lesson_owner_id = $1;'; 
   pool.query(queryText, [userId])
   .then( (result) => {
@@ -55,7 +54,6 @@ router.post('/', (req, res) => {
 
   // delete a users lesson 
   router.delete('/:lessonId', (req, res) => {
-    console.log('DELETING lesson with id:', req.params.lessonId); 
     const lessonId = req.params.lessonId; 
     const answerQueryText =  `DELETE FROM "answer" WHERE answer.lesson_id = $1;`; 
     const questionQueryText = `DELETE FROM "question" WHERE question.lesson_id = $1;`; 

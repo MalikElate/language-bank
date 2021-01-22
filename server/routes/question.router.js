@@ -11,6 +11,7 @@ router.get('/:lessonId', (req, res) => {
   pool.query(queryText, [lessonId])
   .then( (result) => {
     res.send(result.rows);
+    // console.log('result.rows from question get',result.rows)
   })
   .catch( (error) => {
     console.log(`Error on query ${error}`);

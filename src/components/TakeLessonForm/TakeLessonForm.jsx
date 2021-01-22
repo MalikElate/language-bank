@@ -56,7 +56,7 @@ class TakeLessonForm extends Component {
               direction="column"
               justify="center"
               alignItems="center" 
-            > 
+              > 
               <TextField label="Name" variant="outlined" style={{display: "block", margin: "10px"}} 
               onChange={(event)=> this.handleChangeFor(event, 'name')} value={this.state.newStudent.name}/>
               <TextField label="Email" variant="outlined" style={{display: "block", margin: "10px"}} 
@@ -71,8 +71,10 @@ class TakeLessonForm extends Component {
                 }}>Back</Button>
               <Button  variant="contained" onClick={ () => {
                 this.props.dispatch({type: "ADD_STUDENT", payload: this.state.newStudent}); 
-                this.props.history.push(`/take-lesson/question/${this.props.match.params.lessonId}/1`); 
-              }}>Start</Button>
+                this.props.history.push(
+                  `/take-lesson/question/${this.state.newStudent.lessonId}/${this.props.reduxState.question.currentLessonQuestions[0]?.id}`
+                  ); 
+                }}>Start</Button>
             </Grid>
           </Box>
         </Grid>

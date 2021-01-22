@@ -5,7 +5,7 @@ import {
   withStyles,
   Button, 
   Box, 
-  TextField
+  Typography
  } from '@material-ui/core';
 
 const styles = { 
@@ -26,7 +26,8 @@ class TakeLessonQuestion extends Component {
   }
 
   componentDidMount() { 
-    // this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.lessonId});
+    this.props.dispatch({type: 'GET_ANSWER', payload: this.props.match.params.questionId});
+    this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.lessonId});
   }
 
   handleChangeFor = (event, inputType) => { 
@@ -45,31 +46,29 @@ class TakeLessonQuestion extends Component {
         {/* <Typography variant="h4">{}</Typography>  */}
         <Grid style={{margin: "3%"}}>
           <Box boxShadow={2} style={{padding: "5%", display: "block"}}>
-            hello from take lesson question
-            {JSON.stringify(this.props.match.params.lessonId)}
-            {JSON.stringify(this.props.match.params.questionId)}
-            {/* <Grid  
+            <Grid  
               container
               direction="column"
               justify="center"
               alignItems="center" 
             > 
-              <TextField label="Name" variant="outlined" style={{display: "block", margin: "10px"}} 
-              onChange={(event)=> this.handleChangeFor(event, 'name')} value={this.state.newStudent.name}/>
-              <TextField label="Email" variant="outlined" style={{display: "block", margin: "10px"}} 
-              onChange={(event)=> this.handleChangeFor(event, 'email')} value={this.state.newStudent.email}/>
-              <TextField label="Class" variant="outlined" style={{display: "block", margin: "10px"}} 
-              onChange={(event)=> this.handleChangeFor(event, 'class')} value={this.state.newStudent.class}/>
+            {
+              this.props.reduxState.question.currentLessonQuestions.filter((question) => {  
+                return question.id === Number(this.props.match.params.questionId ) 
+            }).map((question, i) =>  
+              <Typography key={i}>
+                {question.question}
+              </Typography>
+            )
+            }
+            {/* {
+          this.props.reduxState.answer.currentLessonAnswers.filter((answer) => {  
+              return this.props.question.id === answer.question_id 
+            }).map((answer, i) => 
+              <AddAnswerForm key={i} order={i} answer={answer}/> 
+            )
+          } */}
             </Grid>
-            <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete</Button>
-            <Grid className={classes.buttonGrid}>
-              <Button className={classes.root} variant="contained" onClick={ () => {
-                this.props.history.push(`/take-lesson`)
-                }}>Back</Button>
-              <Button  variant="contained" onClick={ () => {
-                this.props.dispatch({type: "ADD_STUDENT", payload: this.state.newStudent}); 
-              }}>Start</Button>
-            </Grid> */}
           </Box>
         </Grid>
       </>
