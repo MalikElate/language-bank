@@ -2,9 +2,23 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// get public lessons
 router.get('/', (req, res) => {
   // Add query to get all lessons for a specific user
   const queryText = 'SELECT * from "lesson" WHERE public = true;'; 
+  pool.query(queryText)
+  .then( (result) => {
+      res.send(result.rows);
+  })
+  .catch( (error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+  });
+}); 
+
+// get both the public and private lessons
+router.get('/public-private', (req, res) => {
+  const queryText = 'SELECT * from "lesson";'; 
   pool.query(queryText)
   .then( (result) => {
       res.send(result.rows);

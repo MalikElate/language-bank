@@ -36,14 +36,29 @@ const styles = {
 
 class CreateLesson extends Component {
 
+  state = { 
+    privateLessonId: ''
+  }
+
   componentDidMount() { 
-    this.props.dispatch({type: 'GET_ALL_PUBLIC_LESSONS'})
+    this.props.dispatch({type: 'GET_ALL_PUBLIC_LESSONS'}); 
+    this.props.dispatch({type: 'GET_ALL_LESSONS_PUBLIC_OR_PRIVATE'})
+  }
+
+  startPrivateLesson = () => {   
+    console.log(this.props.reduxState.lesson.allPublicPrivateLessons); 
+    for (let lesson of this.props.reduxState.lesson.allPublicPrivateLessons) { 
+      console.log(lesson.code)
+    }
   }
 
   render() {
     const { classes } = this.props; 
     return (
       <>
+      { 
+        JSON.stringify(this.props.reduxState.lesson.allPublicPrivateLessons)
+      }
        <Grid  direction="row" className={classes.root} container> 
           <Grid item sm={7} xs={12} style={{marginLeft: '3%', marginRight: '10px'}} > 
             <Box boxShadow={2} style={{display: "block"}} className={classes.itemBox} style={{padding: '10px'}}>
@@ -84,9 +99,7 @@ class CreateLesson extends Component {
               </Typography> 
               <Grid style={{marginTop: '5%'}}> 
                 <TextField style={{marginLeft: '15px', marginRight: '15px'}}/>
-                <Button variant="contained" onClick={()=> { 
-                  console.log('deez nuts')
-                }}>Start</Button>
+                <Button variant="contained" onClick={this.startPrivateLesson}>Start</Button>
               </Grid>        
             </Box>
           </Grid>

@@ -12,9 +12,9 @@ function* getQuestions(action){
   }
 }
 
-function* addQuestion(action){ 
+function* addQuestion(action){        
   try {
-      const response = yield axios.post(`/api/question/${action.payload.lessonId}`, action.payload);
+      yield axios.post(`/api/question/${action.payload.lessonId}`, action.payload);
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
@@ -22,9 +22,9 @@ function* addQuestion(action){
   }
 }
 
-function* deleteQuestion(action){ 
+function* deleteQuestion(action){   
   try {
-      const response = yield axios.delete(`/api/question/${action.payload.questionId}`);
+      yield axios.delete(`/api/question/${action.payload.questionId}`);
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
@@ -32,9 +32,9 @@ function* deleteQuestion(action){
   }
 }
 
-function* editQuestion(action){ 
+function* editQuestion(action){   
   try {
-      const response = yield axios.put(`/api/question/${action.payload.questionId}`, action.payload);
+      yield axios.put(`/api/question/${action.payload.questionId}`, action.payload);
       yield put({type: 'GET_QUESTIONS', payload: action.payload.lessonId});
   }
   catch (error) {
