@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {v1 as uuidv1} from 'uuid';
 import {
   Grid,
   withStyles,
@@ -38,10 +39,22 @@ class CreateLesson extends Component {
       notes: '',
       public: true, 
       country: '',
-      difficulty: 'beginner'
+      difficulty: 'beginner',
+      code: ''
     }, 
     lessonCreated: false, 
   };
+
+  componentDidMount() { 
+    let myuuid = uuidv1();
+    console.log('Your UUID is: ' + myuuid);
+    this.setState({ 
+      newLesson: { 
+        ...this.state.newLesson,
+        code: myuuid
+      }
+    })
+  }
 
   handleChangeFor = (event, inputType) => { 
     if (inputType !== 'public') { 
@@ -338,8 +351,6 @@ class CreateLesson extends Component {
       {"name": "Zambia", "code": "ZM"}, 
       {"name": "Zimbabwe", "code": "ZW"} 
       ]
-    
-    console.log('this.state.newLesson',this.state.newLesson)
     return (
       <Grid> 
         <Grid style={{textAlign: 'left', display: 'inline-block', marginLeft: '5%', marginBottom: '4%' }}>

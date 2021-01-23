@@ -15,6 +15,22 @@ router.get('/', (req, res) => {
       res.sendStatus(500);
   });
 }); 
+// Get current lesson
+router.get('/current/:lessonId', (req, res) => {
+  // Add query to get all lessons for a specific user
+  const lessonId = req.params.lessonId;
+  const queryText = 'SELECT * from "lesson" WHERE id = $1;'; 
+  console.log('Getting lesson for id of', lessonId)
+  pool.query(queryText, [lessonId])
+  .then( (result) => {
+      res.send(result.rows);
+  })
+  .catch( (error) => {
+      console.log(`Error on query ${error}`);
+      res.sendStatus(500);
+  });
+}); 
+
 
 // get both the public and private lessons
 router.get('/public-private', (req, res) => {
@@ -55,9 +71,11 @@ router.post('/', (req, res) => {
     const difficulty = req.body.difficulty; 
     const country = req.body.country; 
     const lesson_owner_id = req.body.lesson_owner_id; 
-    const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "difficulty", "country", "public", "lesson_owner_id") 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
-    pool.query(queryText, [description, notes, name, language, difficulty, country, public, lesson_owner_id])
+    const code = req.body.code
+    console.log(code)
+    const queryText = `INSERT INTO "lesson" ("description", "notes", "name", "language", "difficulty", "country", "public", "lesson_owner_id", "code") 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
+    pool.query(queryText, [description, notes, name, language, difficulty, country, public, lesson_owner_id, code])
       .then(() => res.sendStatus(201))
       .catch( (error) => {
         console.log(`Error on post lesson query ${error}`);
@@ -78,19 +96,21 @@ router.post('/', (req, res) => {
     .then( (result) => {
       pool.query(questionQueryText, [lessonId])
       .then( (result) => {
-        pool.query(lessonQueryText, [lessonId])
-          .then( (result) => {
-            pool.query(studentQueryText, [lessonId])
-              .then(() => res.sendStatus(204))
-              .catch( (error) => {
-                console.log(`Error on query ${error}`);
-                res.sendStatus(500);
-              });
-          })
-          .catch( (error) => {
-            console.log(`Error on query ${error}`);
-            res.sendStatus(500);
-          });
+        pool.query(studentQueryText, [lessonId])
+        .then(() => {
+          pool.query(lessonQueryText, [lessonId])
+            .then( (result) => {
+              res.sendStatus(204)
+            })
+            .catch( (error) => {
+              console.log(`Error on query ${error}`);
+              res.sendStatus(500);
+            });
+        })
+        .catch( (error) => {
+          console.log(`Error on query ${error}`);
+          res.sendStatus(500);
+        });
       })
       .catch( (error) => {
           console.log(`Error on query ${error}`);

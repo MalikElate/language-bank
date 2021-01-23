@@ -57,7 +57,7 @@ class CreateLesson extends Component {
     return (
       <>
       { 
-        JSON.stringify(this.props.reduxState.lesson.allPublicPrivateLessons)
+        // JSON.stringify(this.props.reduxState.lesson.allPublicPrivateLessons)
       }
        <Grid  direction="row" className={classes.root} container> 
           <Grid item sm={7} xs={12} style={{marginLeft: '3%', marginRight: '10px'}} > 
