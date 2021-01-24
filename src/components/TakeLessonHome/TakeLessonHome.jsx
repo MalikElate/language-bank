@@ -69,8 +69,8 @@ class CreateLesson extends Component {
         // JSON.stringify(this.props.reduxState.lesson.allPublicPrivateLessons)
       }
        <Grid  direction="row" className={classes.root} container> 
-          <Grid item sm={7} xs={12} style={{marginLeft: '3%', marginRight: '10px'}} > 
-            <Box boxShadow={2} style={{display: "block"}} className={classes.itemBox} style={{padding: '10px'}}>
+          <Grid item sm={7} xs={12} style={{ backgroundColor: "white", marginLeft: '3%', marginRight: '10px'}} > 
+            <Box boxShadow={2} style={{display: "block", backgroundColor: "white"}} className={classes.itemBox} style={{padding: '10px'}}>
               <Typography color="primary" variant="h4" className={classes.boxHeader}>Public lessons</Typography> 
               <Table>
                 <TableHead> 
@@ -101,7 +101,7 @@ class CreateLesson extends Component {
             </Box>
           </Grid>
           <Grid item sm={4} xs={12} > 
-            <Box boxShadow={2} style={{display: "block", padding: '10px'}} className={classes.itemBox}>
+            <Box boxShadow={2} style={{display: "block", padding: '10px', backgroundColor: "white"}} className={classes.itemBox}>
               <Typography color="primary" variant="h4" className={classes.boxHeader}>Private lessons</Typography>
               <Typography color="primary" variant="body1" className={classes.boxHeader}>
                 Enter the private lesson code shared by your instructor.
