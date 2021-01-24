@@ -37,23 +37,32 @@ const styles = {
 class CreateLesson extends Component {
 
   state = { 
-    privateLessonId: ''
+    privateLessonId: '', 
   }
 
   componentDidMount() { 
     this.props.dispatch({type: 'GET_ALL_PUBLIC_LESSONS'}); 
-    this.props.dispatch({type: 'GET_ALL_LESSONS_PUBLIC_OR_PRIVATE'})
+    this.props.dispatch({type: 'GET_ALL_LESSONS_PUBLIC_OR_PRIVATE'}); 
+  }
+
+  handleChange = (event) => { 
+    this.setState({ 
+      privateLessonId: event.target.value
+    })
   }
 
   startPrivateLesson = () => {   
     console.log(this.props.reduxState.lesson.allPublicPrivateLessons); 
     for (let lesson of this.props.reduxState.lesson.allPublicPrivateLessons) { 
-      console.log(lesson.code)
+      if(lesson?.code === this.state.privateLessonId ) { 
+        this.props.history.push(`/take-lesson/form/${lesson?.id}`); 
+      }
     }
   }
 
   render() {
     const { classes } = this.props; 
+    console.log(this.state.privateLessonId)
     return (
       <>
       { 
@@ -98,7 +107,7 @@ class CreateLesson extends Component {
                 Enter the private lesson code shared by your instructor.
               </Typography> 
               <Grid style={{marginTop: '5%'}}> 
-                <TextField style={{marginLeft: '15px', marginRight: '15px'}}/>
+                <TextField style={{marginLeft: '15px', marginRight: '15px'}} onChange={(event)=>this.handleChange(event)}/>
                 <Button variant="contained" onClick={this.startPrivateLesson}>Start</Button>
               </Grid>        
             </Box>

@@ -54,6 +54,7 @@ function* getAllPublicPrivateLessons(){
 function* deleteLesson(action){ 
   try {
     yield axios.delete(`/api/lesson/${action.payload.lessonId}`);
+    yield put({type: 'GET_ALL_LESSONS'}); 
   }
   catch (error) {
       console.log('error with test lesson get request', error);

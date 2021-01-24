@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import copy from 'copy-to-clipboard';
+import { AiOutlineCopy } from "react-icons/ai";
 import LessonDetailsQuestion from '../LessonDetailsQuestion/LessonDetailsQuestion'; 
 import {
   Grid,
@@ -87,12 +89,11 @@ class LessonDetails extends Component {
                 <Typography style={{margin: "3%"}}>difficulty: {this.props.reduxState.lesson.currentLesson[0]?.difficulty}</Typography>
               </li>
               <li>
-                <Typography style={{margin: "3%"}}>lesson code: {this.props.reduxState.lesson.currentLesson[0]?.code}</Typography>
-                <Button value={this.props.reduxState.lesson.currentLesson[0]?.code} onClick={(event) => { 
-                  event.target.value.select();
-                  document.execCommand('copy');
-                  console.log(this.props.reduxState.lesson.currentLesson[0]?.code)
-                }}>Copy</Button>
+                <Typography style={{margin: "3%"}}>lesson code: {this.props.reduxState.lesson.currentLesson[0]?.code}
+                <Button style={{marginLeft: "3%"}} value={this.props.reduxState.lesson.currentLesson[0]?.code} onClick={(event) => { 
+                  copy(this.props.reduxState.lesson.currentLesson[0]?.code) 
+                }}><AiOutlineCopy/></Button>
+                </Typography>
               </li>
             </ul>
             <Grid style={{marginTop: "10%"}}>
