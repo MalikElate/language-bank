@@ -9,9 +9,16 @@ import {
  } from '@material-ui/core';
 
  const styles = {
-  buttonGrid: {
-    marginTop: '30%',
-  },
+  createLessonButton: { 
+    position: "absolute",
+    top: "20%",
+    left: "10%",
+  }, 
+  takeLessonButton: { 
+    position: "absolute",
+    top: "30%",
+    left: "10%",
+  }
 };
 
 class LandingPage extends Component { 
@@ -20,30 +27,19 @@ class LandingPage extends Component {
   render() {
     const { classes } = this.props;
     return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center" 
-          direction="column"
-          > 
-          <Grid
-          item lg={12}
-          style={{ padding: 20}}>
-            <Typography variant="h1" color="primary">Tōpo</Typography> 
-          </Grid>
-          {/* <WorldMap/> */}
-          <Grid
+      <>
+          <div
           className={classes.buttonGrid}
-          item lg={12}
           >
-            <Button variant="contained" style={{marginRight: '50px'}} onClick={ () => { 
+            <Button variant="contained" color="secondary" className={classes.takeLessonButton} onClick={ () => { 
               this.props.history.push('/take-lesson');
             }}>Take a lesson</Button>
-            <Button variant="contained" style={{marginLeft: '50px'}} onClick={ () => { 
+            <Button variant="contained" color="secondary"  className={classes.createLessonButton} onClick={ () => { 
               this.props.history.push('/create-lesson'); 
             }} >Create a lesson</Button>
-          </Grid>
-        </Grid>
+          </div>
+            <WorldMap/>  
+        </>
     );
   }
 }
