@@ -50,7 +50,7 @@ class TakeLessonForm extends Component {
       <>
         {/* <Typography variant="h4">{}</Typography>  */}
         <Grid style={{margin: "3%"}}>
-          <Box boxShadow={2} style={{padding: "5%", display: "block"}}>
+          <Box boxShadow={2} style={{padding: "5%", display: "block", backgroundColor: "white"}}>
             <Grid  
               container
               direction="column"

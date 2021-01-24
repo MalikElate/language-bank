@@ -46,11 +46,6 @@ class TakeLessonQuestion extends Component {
     })
     for (let question of this.props.reduxState.question.currentLessonQuestions) { 
       if (question.id == this.props.match.params.questionId) { 
-        // console.log("---------MATCH---------------", question.lesson_id); 
-        // console.log("---------Next index---------------", this.props.reduxState.question.currentLessonQuestions?.indexOf(question) + 1); 
-        // console.log("------------Next ID _________", this.props.reduxState.question.currentLessonQuestions[this.props.reduxState.question.currentLessonQuestions?.indexOf(question) + 1]?.id)
-        // console.log("---------current index-------------", this.props.reduxState.question.currentLessonQuestions?.indexOf(question)); 
-        // console.log("---------final index---------------", this.props.reduxState.question.currentLessonQuestions.length - 1);
         this.setState({ 
           nextQuestionId: this.props.reduxState.question.currentLessonQuestions[this.props.reduxState.question.currentLessonQuestions?.indexOf(question) + 1]?.id,
           currentQuestionIndex: this.props.reduxState.question.currentLessonQuestions?.indexOf(question), 
@@ -59,7 +54,6 @@ class TakeLessonQuestion extends Component {
       }
     }
   }
-  // path="/take-lesson/question/:lessonId/:questionId"
   nextQuestion = () => { 
     this.setState({ 
       mode: "question"
@@ -86,12 +80,12 @@ class TakeLessonQuestion extends Component {
     console.log(mode)
     let boxContents; 
     if(this.state.mode === "question") { 
-      boxContents = <>
+      boxContents = <><Grid>
       {
         this.props.reduxState.question.currentLessonQuestions.filter((question) => {  
           return question.id === Number(this.props.match.params.questionId ); 
       }).map((question, i) =>  
-        <Typography variant="body1" key={i}>
+        <Typography style={{padding: "15px"}}variant="body1" key={i}>
           {question.question}
         </Typography>
       )
@@ -114,6 +108,7 @@ class TakeLessonQuestion extends Component {
             }
         </RadioGroup>
       </FormControl>
+      </Grid>
       <Button variant="contained" onClick={this.submitAnswer}>Submit</Button>
       </>
     } else if (this.state.mode === "confirmation") { 
@@ -136,7 +131,7 @@ class TakeLessonQuestion extends Component {
         {/* <Typography variant="h4">{}</Typography>  */}
         {/* {JSON.stringify(this.props.reduxState.answer.currentLessonAnswers)} */}
         <Grid style={{margin: "3%"}}>
-          <Box boxShadow={2} style={{padding: "5%", display: "block"}}>
+          <Box boxShadow={2} style={{padding: "5%", display: "block", backgroundColor: "white"}}>
             <Grid  
               container
               direction="column"

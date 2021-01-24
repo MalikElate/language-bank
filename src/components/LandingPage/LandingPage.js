@@ -31,7 +31,7 @@ class LandingPage extends Component {
           style={{ padding: 20}}>
             <Typography variant="h1" color="primary">Tōpo</Typography> 
           </Grid>
-          <WorldMap/>
+          {/* <WorldMap/> */}
           <Grid
           className={classes.buttonGrid}
           item lg={12}

@@ -30,7 +30,8 @@ const styles = {
   formBox: { 
     width: "100%", 
     margin: "3%", 
-    minHeight: "60vh"
+    minHeight: "60vh", 
+    backgroundColor: "white"
   }
 }
 

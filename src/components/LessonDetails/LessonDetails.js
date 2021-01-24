@@ -49,9 +49,16 @@ class LessonDetails extends Component {
     return (
       <>
         {/* <Typography variant="h4">{}</Typography>  */}
+        <Grid style={{textAlign: "left", marginLeft: '6%'}}> 
+              <Typography color="primary" variant="h5">Lesson Details: {this.props.reduxState.lesson.currentLesson[0]?.name}</Typography>
+        </Grid> 
         <Grid  direction="row" className={classes.root} container> 
           <Grid item xs={5} style={{marginLeft: '4%'}} > 
-            <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
+            <Box boxShadow={2} style={{backgroundColor: 'white', margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
+            <Grid style={{marginBottom: "10"}}>
+              <Button variant="contained" style={{marginRight: '10px'}} onClick={this.editLesson}>Edit lesson</Button>
+              <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete lesson</Button>
+            </Grid>
               <ol>
               {
                 this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
@@ -65,7 +72,7 @@ class LessonDetails extends Component {
             </Box>
           </Grid>
           <Grid item xs={5} > 
-          <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
+          <Box boxShadow={2} style={{backgroundColor: 'white', margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
             <Grid style={{textAlign: "center", padding: '10px'}}> 
               <Typography variant="h6">{this.props.reduxState.lesson.currentLesson[0]?.name}</Typography>
             </Grid> 
@@ -77,7 +84,7 @@ class LessonDetails extends Component {
                 <Typography style={{margin: "3%"}}>description: {this.props.reduxState.lesson.currentLesson[0]?.description}</Typography>
               </li>
               <li>
-                <Typography style={{margin: "3%"}}>notes: {this.props.reduxState.lesson.currentLesson[0]?.notes}</Typography>
+                <Typography style={{margin: "3%"}}>notes: <a target="_blank" href={this.props.reduxState.lesson.currentLesson[0]?.notes}>{this.props.reduxState.lesson.currentLesson[0]?.notes}</a></Typography>
               </li>
               <li>
                 <Typography style={{margin: "3%"}}>country: {this.props.reduxState.lesson.currentLesson[0]?.country}</Typography>
@@ -96,10 +103,6 @@ class LessonDetails extends Component {
                 </Typography>
               </li>
             </ul>
-            <Grid style={{marginTop: "10%"}}>
-              <Button variant="contained" style={{marginRight: '10px'}} onClick={this.editLesson}>Edit lesson</Button>
-              <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete lesson</Button>
-            </Grid>
             {/* {JSON.stringify(this.props.reduxState.lesson.currentLesson[0])} */}
           </Box>
           </Grid>

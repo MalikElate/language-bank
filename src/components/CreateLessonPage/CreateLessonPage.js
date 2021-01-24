@@ -38,7 +38,8 @@ const styles = {
     marginLeft: "3%", 
     marginRight: "3%", 
     minHeight: "50vh", 
-    paddingTop: "3%"
+    paddingTop: "3%", 
+    backgroundColor: "white"
   }
 }
 

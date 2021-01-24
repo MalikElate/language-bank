@@ -31,6 +31,12 @@ class CreateLesson extends Component {
   componentDidMount() { 
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.id});
     this.props.dispatch({type: 'GET_ANSWER', payload: this.props.match.params.id});
+    if (this.props.reduxState.question.currentLessonQuestions.length > 0) { 
+      this.setState({ 
+        backgroundColor: "white", 
+        boxShadow: "2"
+      })
+    }
   } 
     
   // GET_QUESTIONS_AND_ANSWERS
@@ -38,7 +44,9 @@ class CreateLesson extends Component {
       newQuestion: { 
         question: '', 
         lessonId: this.props.match.params.id
-      }
+      }, 
+      boxShadow: "0", 
+      backgroundColor: "#f9f9f9"
     }
 
   addQuestion = () => { 
@@ -76,6 +84,7 @@ class CreateLesson extends Component {
         <Button style={{marginRight: "1000"}} variant="contained" onClick={() => this.submit()}>Submit</Button>
       </Grid>
     }
+
     return (
       // <Grid style={{textAlign: 'center', padding:'0%', margin: '0%'}} spacing={0} >
       <>
@@ -83,16 +92,18 @@ class CreateLesson extends Component {
           <Typography variant="h4">Add Questions</Typography> 
         </Box>
         <Grid style={{textAlign: 'center', marginTop: '6%'}} >
-          <Box component="span">
-            <TextField
-              style={{width: '72%', marginBottom: '5%'}}
-              onChange={this.handleChangeQuestion}
-              value={this.state.newQuestion.question}
-            />
-          </Box>
-          <Box component="span" style={{marginLeft: '5%'}}>
-            <Button variant="contained" className="add-btn" onClick={this.addQuestion}>Add question</Button>
-            {topSubmitButton}
+          <Box boxShadow={2} style={{backgroundColor: "white", marginLeft: "3%", marginBottom: "3%", marginRight: "3%", padding: "20px" }}>
+            <Box component="span">
+              <TextField
+                style={{width: '72%', marginBottom: '5%'}}
+                onChange={this.handleChangeQuestion}
+                value={this.state.newQuestion.question}
+                />
+            </Box>
+            <Box component="span" style={{marginLeft: '5%'}}>
+              <Button variant="contained" className="add-btn" onClick={this.addQuestion}>Add question</Button>
+              {topSubmitButton}
+            </Box>
           </Box>
         </Grid>
           {
