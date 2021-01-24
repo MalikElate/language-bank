@@ -11,7 +11,7 @@ import {
   TableRow, 
   TableCell, 
   TableBody, 
-
+  Box
  } from '@material-ui/core';
 
 const styles = { 
@@ -26,6 +26,11 @@ const styles = {
     "&:hover": {
       backgroundColor: "blue !important"
     }
+  }, 
+  formBox: { 
+    width: "100%", 
+    margin: "3%", 
+    minHeight: "60vh"
   }
 }
 
@@ -46,16 +51,16 @@ class Dashboard extends Component {
           > 
           <Grid
           item lg={12} sm={12} xs={12}
-          style={{ padding: 20}}
           >
-            <Grid style={{textAlign: 'left', display: 'inline-block', marginRight: '60%'}}>
+            <Grid style={{textAlign: 'left', display: 'inline-block', marginLeft: "3%", marginRight: '40%'}}>
             {/* ------------------------------- Gid containing delete, and edit or delete buttons----------------- */}
-              <Typography variant="h4" color="primary" >Lessons</Typography> 
+              <Typography variant="h4" color="primary" >Welcome back, {this.props.reduxState.user.username}</Typography> 
             </Grid> 
             <Button variant="contained" className={classes.grow} onClick={() => {  
               this.props.history.push('/create-lesson');
             }} >Create a lesson</Button>
           </Grid>
+        <Box boxShadow={2} className={classes.formBox} >
           <Grid
           item lg={12} sm={12} xs={12}
           style={{ padding: 20}}>
@@ -78,6 +83,7 @@ class Dashboard extends Component {
               </TableBody>
             </Table> 
           </Grid>
+          </Box>
         </Grid>
     )
   }

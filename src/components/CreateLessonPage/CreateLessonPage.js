@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {v1 as uuidv1} from 'uuid';
 import {
   Grid,
   withStyles,
@@ -15,16 +16,29 @@ import {
   FormHelperText, 
   MenuItem, 
   InputLabel,
+  Box
  } from '@material-ui/core';
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
 // the component name TemplateClass with the name for the new
 // component.
 
-const styles = { 
+const styles = {   
   submitButton: { 
     textAlign: "right", 
-    marginRight: '5%'
+    marginRight: '5%', 
+    marginTop: "60px"
+  }, 
+  createButton: { 
+    textAlign: "Left", 
+    marginLeft: '5%', 
+    marginTop: "60px"
+  },
+  formBox: { 
+    marginLeft: "3%", 
+    marginRight: "3%", 
+    minHeight: "50vh", 
+    paddingTop: "3%"
   }
 }
 
@@ -38,10 +52,22 @@ class CreateLesson extends Component {
       notes: '',
       public: true, 
       country: '',
-      difficulty: 'beginner'
+      difficulty: 'beginner',
+      code: ''
     }, 
     lessonCreated: false, 
   };
+
+  componentDidMount() { 
+    let myuuid = uuidv1();
+    console.log('Your UUID is: ' + myuuid);
+    this.setState({ 
+      newLesson: { 
+        ...this.state.newLesson,
+        code: myuuid
+      }
+    })
+  }
 
   handleChangeFor = (event, inputType) => { 
     if (inputType !== 'public') { 
@@ -338,92 +364,102 @@ class CreateLesson extends Component {
       {"name": "Zambia", "code": "ZM"}, 
       {"name": "Zimbabwe", "code": "ZW"} 
       ]
-    
-    console.log('this.state.newLesson',this.state.newLesson)
     return (
-      <Grid> 
+      <>
         <Grid style={{textAlign: 'left', display: 'inline-block', marginLeft: '5%', marginBottom: '4%' }}>
           <Typography variant="h4" color="primary">Create a lesson </Typography> 
         </Grid> 
-        {/* -------------------------------- Basic lesson info inputs -------------------------------- */}
-        <Grid  
+        <Box boxShadow={2} className={classes.formBox} >
+        <Grid container>
+          {/* -------------------------------- Basic lesson info inputs -------------------------------- */}
+          <Grid  
+            sm={6}
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            style={{alignItems: "center"}} 
+            > 
+            <TextField label="Lesson name" variant="outlined" style={{display: "block", margin: "10px"}} 
+            onChange={(event)=> this.handleChangeFor(event, 'lessonName')} value={this.state.newLesson.lessonName}/>
+            <TextField label="Language" variant="outlined" style={{display: "block", margin: "10px"}} 
+            onChange={(event)=> this.handleChangeFor(event, 'language')} value={this.state.newLesson.language}/>
+            <TextField label="Description" variant="outlined" style={{display: "block", margin: "10px"}} 
+            onChange={(event)=> this.handleChangeFor(event, 'description')} value={this.state.newLesson.description}/>
+            <TextField label="Notes link" variant="outlined" style={{display: "block", margin: "10px"}} 
+            onChange={(event)=> this.handleChangeFor(event, 'notes')} value={this.state.newLesson.notes}/>
+            {/* -------------------------------- Language selector -------------------------------- */}
+          </Grid>{/* ---------------  END OF LESSON NAME - NOTES LINK FORM ------------------- */}
+          <Grid  
           container
+          sm={6}
           direction="column"
           justify="center"
-          alignItems="center" 
+          alignItems="right" 
           > 
-          <TextField label="Lesson name" variant="outlined" style={{display: "block", margin: "10px"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'lessonName')} value={this.state.newLesson.lessonName}/>
-          <TextField label="Language" variant="outlined" style={{display: "block", margin: "10px"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'language')} value={this.state.newLesson.language}/>
-          <TextField label="Description" variant="outlined" style={{display: "block", margin: "10px"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'description')} value={this.state.newLesson.description}/>
-          <TextField label="Notes link" variant="outlined" style={{display: "block", margin: "10px"}} 
-          onChange={(event)=> this.handleChangeFor(event, 'notes')} value={this.state.newLesson.notes}/>
-          {/* -------------------------------- Language selector -------------------------------- */}
-          <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-helper-label">Country</InputLabel>
-            <Select
-              labelId="demo-simple-select-helper-label"
-              id="demo-simple-select-helper"
-              value={this.state.newLesson.country}
-              onChange={(event)=>this.handleChangeFor(event, 'country')}
-            >
-              {
-                countries.map((country, i) => (
-                  <MenuItem key={i} value={country.name ? country.name : " "} >{country.name}</MenuItem>
-                ))
-              }
-            </Select>
-            <FormHelperText>Language origin</FormHelperText>
-          </FormControl>
-              {/* -------------------------------- Difficulty radio -------------------------------- */}
-          <FormControl component="fieldset" style={{textAlign: 'center', display: "block", margin: "15px"}}>
-          <RadioGroup row>
-            <FormLabel component="legend">Difficulty level</FormLabel>
-              <FormControlLabel 
-              value={"beginner"}  
-              onChange={(event)=>this.handleChangeFor(event, "difficulty")} 
-              control={<Radio />} label="Beginner" 
-              checked={this.state.newLesson.difficulty==="beginner"}
-              style={{marginLeft: '35px'}}
-              />
-              <FormControlLabel 
-              value={"intermediate"} 
-              onChange={(event)=>this.handleChangeFor(event, "difficulty")} 
-              checked={this.state.newLesson.difficulty==="intermediate"} control={<Radio />} label="Intermediate" 
-              />
-              <FormControlLabel 
-              value={"expert"} 
-              onChange={(event)=>this.handleChangeFor(event, "difficulty")} 
-              checked={this.state.newLesson.difficulty==="expert"} control={<Radio />} label="Expert" 
-              />
-            </RadioGroup>
-          </FormControl>
-          <FormControl component="fieldset" style={{textAlign: 'center', display: "block", margin: "15px"}}>
-          {/* -------------------------------- Public status radio radio -------------------------------- */}
-          <FormLabel component="legend">Do you want you lesson to be public?</FormLabel>
-          <RadioGroup row>
-              <FormControlLabel 
-              value={true}  
-              onChange={(event)=>this.handleChangeFor(event, "public")} 
-              control={<Radio />} label="Public" 
-              checked={this.state.newLesson.public}
-              style={{marginLeft: '35px'}}
-              />
-              <FormControlLabel 
-              value={false} 
-              onChange={(event)=>this.handleChangeFor(event, "public")} 
-              checked={!this.state.newLesson.public} control={<Radio />} label="Private" 
-              />
-          </RadioGroup>
-          </FormControl>
-          {createButton}
-        </Grid> 
-        <Grid className={classes.submitButton}>
-          {submitButton}
+            <FormControl className={classes.formControl} style={{width: '50%'}}>
+              <InputLabel>Country</InputLabel>
+              <Select
+                value={this.state.newLesson.country}
+                onChange={(event)=>this.handleChangeFor(event, 'country')}
+                >
+                {
+                  countries.map((country, i) => (
+                    <MenuItem key={i} value={country.name ? country.name : " "} >{country.name}</MenuItem>
+                    ))
+                  }
+              </Select>
+              <FormHelperText>Language origin</FormHelperText>
+            </FormControl>
+                {/* -------------------------------- Difficulty radio -------------------------------- */}
+            <FormControl component="fieldset" style={{ display: "block", marginTop: "25px"}}>
+              <FormLabel component="legend">Difficulty level</FormLabel>
+              <RadioGroup row>
+                <FormControlLabel 
+                value={"beginner"}  
+                onChange={(event)=>this.handleChangeFor(event, "difficulty")} 
+                control={<Radio />} label="Beginner" 
+                checked={this.state.newLesson.difficulty==="beginner"}
+                />
+                <FormControlLabel 
+                value={"intermediate"} 
+                onChange={(event)=>this.handleChangeFor(event, "difficulty")} 
+                checked={this.state.newLesson.difficulty==="intermediate"} control={<Radio />} label="Intermediate" 
+                />
+                <FormControlLabel 
+                value={"expert"} 
+                onChange={(event)=>this.handleChangeFor(event, "difficulty")} 
+                checked={this.state.newLesson.difficulty==="expert"} control={<Radio />} label="Expert" 
+                />
+              </RadioGroup>
+            </FormControl>
+            {/* -------------------------------- Public status radio radio -------------------------------- */}
+            <FormControl component="fieldset" style={{ display: "block", marginTop: "25px"}}>
+              <FormLabel component="legend">Do you want you lesson to be public?</FormLabel>
+              <RadioGroup row>
+                  <FormControlLabel 
+                  value={true}  
+                  onChange={(event)=>this.handleChangeFor(event, "public")} 
+                  control={<Radio />} label="Public" 
+                  checked={this.state.newLesson.public}
+                  />
+                  <FormControlLabel 
+                  value={false} 
+                  onChange={(event)=>this.handleChangeFor(event, "public")} 
+                  checked={!this.state.newLesson.public} control={<Radio />} label="Private" 
+                  />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
         </Grid>
-      </Grid>
+          <Grid className={classes.createButton}>
+            {createButton}
+          </Grid>
+          <Grid className={classes.submitButton}>
+            {submitButton}
+          </Grid>
+        </Box>
+      </>
     );
   }
 }

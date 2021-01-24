@@ -19,6 +19,15 @@ const allPublicLessons = (state = [], action) => {
   }
 };
 
+const currentLesson = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_LESSONS':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const allPublicPrivateLessons = (state = [], action) => {
   switch (action.type) {
     case 'SET_ALL_PUBLIC_PRIVATE_LESSONS':
@@ -35,5 +44,6 @@ const allPublicPrivateLessons = (state = [], action) => {
 export default combineReducers({
   allUserLessons,
   allPublicLessons, 
-  allPublicPrivateLessons
+  allPublicPrivateLessons, 
+  currentLesson
 });

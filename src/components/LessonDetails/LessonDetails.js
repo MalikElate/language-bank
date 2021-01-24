@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import copy from 'copy-to-clipboard';
+import { AiOutlineCopy } from "react-icons/ai";
 import LessonDetailsQuestion from '../LessonDetailsQuestion/LessonDetailsQuestion'; 
 import {
   Grid,
   withStyles,
   Button, 
-  Box
+  Box, 
+  Typography
  } from '@material-ui/core';
 
 const styles = { 
@@ -22,6 +25,7 @@ class LessonDetails extends Component {
   componentDidMount() { 
     this.props.dispatch({type: 'GET_QUESTIONS', payload: this.props.match.params.lessonId});
     this.props.dispatch({type: 'GET_ANSWER', payload: this.props.match.params.lessonId});
+    this.props.dispatch({type: 'GET_CURRENT_LESSON', payload: this.props.match.params.lessonId});
   }
 
   deleteLesson = () => { 
@@ -48,12 +52,12 @@ class LessonDetails extends Component {
         <Grid  direction="row" className={classes.root} container> 
           <Grid item xs={5} style={{marginLeft: '4%'}} > 
             <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
-              <Button variant="contained" style={{marginRight: '10px'}} onClick={this.editLesson}>Edit</Button>
-              <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete</Button>
               <ol>
               {
                 this.props.reduxState.question.currentLessonQuestions.map((question, i) =>  
+                <Grid key={i} style={{margin: '3%'}}> 
                   <LessonDetailsQuestion key={i} question={question}/>
+                </Grid>
                 )
               }
               </ol>
@@ -62,8 +66,41 @@ class LessonDetails extends Component {
           </Grid>
           <Grid item xs={5} > 
           <Box boxShadow={2} style={{margin: "3%", padding: "5%", display: "block"}} className={classes.itemGrid}>
-
-
+            <Grid style={{textAlign: "center", padding: '10px'}}> 
+              <Typography variant="h6">{this.props.reduxState.lesson.currentLesson[0]?.name}</Typography>
+            </Grid> 
+            <ul>
+              <li>
+                <Typography style={{margin: "3%"}}>language: {this.props.reduxState.lesson.currentLesson[0]?.language}</Typography>
+              </li>
+              <li>
+                <Typography style={{margin: "3%"}}>description: {this.props.reduxState.lesson.currentLesson[0]?.description}</Typography>
+              </li>
+              <li>
+                <Typography style={{margin: "3%"}}>notes: {this.props.reduxState.lesson.currentLesson[0]?.notes}</Typography>
+              </li>
+              <li>
+                <Typography style={{margin: "3%"}}>country: {this.props.reduxState.lesson.currentLesson[0]?.country}</Typography>
+              </li>
+              <li>
+                <Typography style={{margin: "3%"}}>public: {this.props.reduxState.lesson.currentLesson[0]?.public.toString()}</Typography>
+              </li>
+              <li>
+                <Typography style={{margin: "3%"}}>difficulty: {this.props.reduxState.lesson.currentLesson[0]?.difficulty}</Typography>
+              </li>
+              <li>
+                <Typography style={{margin: "3%"}}>lesson code: {this.props.reduxState.lesson.currentLesson[0]?.code}
+                <Button style={{marginLeft: "3%"}} value={this.props.reduxState.lesson.currentLesson[0]?.code} onClick={(event) => { 
+                  copy(this.props.reduxState.lesson.currentLesson[0]?.code) 
+                }}><AiOutlineCopy/></Button>
+                </Typography>
+              </li>
+            </ul>
+            <Grid style={{marginTop: "10%"}}>
+              <Button variant="contained" style={{marginRight: '10px'}} onClick={this.editLesson}>Edit lesson</Button>
+              <Button variant="contained" color="primary" onClick={this.deleteLesson}>Delete lesson</Button>
+            </Grid>
+            {/* {JSON.stringify(this.props.reduxState.lesson.currentLesson[0])} */}
           </Box>
           </Grid>
         </Grid>

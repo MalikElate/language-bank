@@ -21,6 +21,15 @@ function* getAllLessonsForUser(){
       console.log('error with test lesson get request', error);
   }
 }
+function* getCurrentLesson(action){ 
+  try {
+      const response = yield axios.get(`/api/lesson/current/${action.payload}`);
+      yield put({type: 'SET_CURRENT_LESSONS', payload: response.data}); 
+  }
+  catch (error) {
+      console.log('error with test lesson get request', error);
+  }
+}
 // Get all public lessons for the take lesson home page
 function* getAllPublicLessons(){ 
   try {
@@ -45,6 +54,7 @@ function* getAllPublicPrivateLessons(){
 function* deleteLesson(action){ 
   try {
     yield axios.delete(`/api/lesson/${action.payload.lessonId}`);
+    yield put({type: 'GET_ALL_LESSONS'}); 
   }
   catch (error) {
       console.log('error with test lesson get request', error);
@@ -59,6 +69,7 @@ function* lessonSaga() {
   yield takeLatest('DELETE_LESSON', deleteLesson);
   yield takeLatest('GET_ALL_PUBLIC_LESSONS', getAllPublicLessons);
   yield takeLatest('GET_ALL_LESSONS_PUBLIC_OR_PRIVATE', getAllPublicPrivateLessons);
+  yield takeLatest('GET_CURRENT_LESSON', getCurrentLesson);
 }
 
 export default lessonSaga;
