@@ -88,7 +88,7 @@ class CreateLesson extends Component {
     return (
       // <Grid style={{textAlign: 'center', padding:'0%', margin: '0%'}} spacing={0} >
       <>
-        <Box component="div" style={{marginLeft: '5%'}}>
+        <Box component="div" style={{marginLeft: '5%', marginTop: "20px"}}>
           <Typography variant="h4">Add Questions</Typography> 
         </Box>
         <Grid style={{textAlign: 'center', marginTop: '6%'}} >

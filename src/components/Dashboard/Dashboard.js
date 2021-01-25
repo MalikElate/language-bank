@@ -48,7 +48,7 @@ class Dashboard extends Component {
       <Grid
           container
           direction="row"
-          style={{ backgroundImage: "url('./images/image100.png')", }}
+          style={{ backgroundImage: "url('./images/image100.png')", marginTop: "20px" }}
           > 
           <Grid
           item lg={12} sm={12} xs={12}

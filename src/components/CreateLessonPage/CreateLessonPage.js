@@ -27,19 +27,21 @@ const styles = {
   submitButton: { 
     textAlign: "right", 
     marginRight: '5%', 
-    marginTop: "60px"
+    marginTop: "20px", 
+    padding: "20px"
   }, 
   createButton: { 
     textAlign: "Left", 
     marginLeft: '5%', 
-    marginTop: "60px"
+    marginTop: "20px", 
+    padding: "20px"
   },
   formBox: { 
     marginLeft: "3%", 
     marginRight: "3%", 
     minHeight: "50vh", 
     paddingTop: "3%", 
-    backgroundColor: "white"
+    backgroundColor: "white", 
   }
 }
 
@@ -58,7 +60,6 @@ class CreateLesson extends Component {
     }, 
     lessonCreated: false, 
   };
-
   componentDidMount() { 
     let myuuid = uuidv1();
     console.log('Your UUID is: ' + myuuid);
@@ -69,7 +70,6 @@ class CreateLesson extends Component {
       }
     })
   }
-
   handleChangeFor = (event, inputType) => { 
     if (inputType !== 'public') { 
       this.setState({ 
@@ -367,7 +367,7 @@ class CreateLesson extends Component {
       ]
     return (
       <>
-        <Grid style={{textAlign: 'left', display: 'inline-block', marginLeft: '5%', marginBottom: '4%' }}>
+        <Grid style={{textAlign: 'left', display: 'inline-block', marginLeft: '5%', marginBottom: '2%', marginTop: "20px"}}>
           <Typography variant="h4" color="primary">Create a lesson </Typography> 
         </Grid> 
         <Box boxShadow={2} className={classes.formBox} >

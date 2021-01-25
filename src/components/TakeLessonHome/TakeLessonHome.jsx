@@ -20,7 +20,8 @@ const styles = {
     marginRight: "5%"
   }, 
   root: { 
-    flexGrow: 1
+    flexGrow: 1, 
+    marginTop: "20px"
   }, 
   boxHeader: { 
     padding: "10px"

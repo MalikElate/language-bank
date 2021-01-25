@@ -49,7 +49,7 @@ class LessonDetails extends Component {
     return (
       <>
         {/* <Typography variant="h4">{}</Typography>  */}
-        <Grid style={{textAlign: "left", marginLeft: '6%'}}> 
+        <Grid style={{textAlign: "left", marginLeft: '6%', marginTop: "20px"}}> 
               <Typography color="primary" variant="h5">Lesson Details: {this.props.reduxState.lesson.currentLesson[0]?.name}</Typography>
         </Grid> 
         <Grid  direction="row" className={classes.root} container> 
