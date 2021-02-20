@@ -28,9 +28,7 @@ class LandingPage extends Component {
     const { classes } = this.props;
     return (
       <>
-          <div
-          className={classes.buttonGrid}
-          >
+          <div className={classes.buttonGrid} >
             <Button variant="contained" color="secondary" className={classes.takeLessonButton} onClick={ () => { 
               this.props.history.push('/take-lesson');
             }}>Take a lesson</Button>
