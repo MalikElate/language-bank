@@ -56,4 +56,6 @@ If you have suggestions or issues, please email me at [malik.e1955@gmail.com](ww
 
 ## Screen Shot
 
-![Stretch Goals Wireframe](wireframes/githubataglance.png)
+![Landing](images/landing.png)
+![Take a lesson](images/takealesson.png)
+![Create a lesson](images/createalesson.png)
