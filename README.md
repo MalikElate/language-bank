@@ -43,10 +43,11 @@ To see the fully functional site, please visit: [Demo](https://polar-forest-3865
 2. JavaScript 
 3. PostgreSQL 
 4. Node + Express
-5. React Bootstrap 
+5. React Bootstrap '
 6. CSS 
 7. HTML 
 8. React Globe 
+9. Material UI
 
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality.
